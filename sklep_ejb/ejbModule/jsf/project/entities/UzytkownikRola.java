@@ -1,8 +1,17 @@
 package jsf.project.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -28,12 +37,12 @@ public class UzytkownikRola implements Serializable {
 
 	//bi-directional many-to-one association to Rola
 	@ManyToOne
-	@JoinColumn(name="idRola")
+	@JoinColumn(name="idRola", insertable=false, updatable=false)
 	private Rola rola;
 
 	//bi-directional many-to-one association to Uzytkownik
 	@ManyToOne
-	@JoinColumn(name="idUzytkownik")
+	@JoinColumn(name="idUzytkownik", insertable=false, updatable=false)
 	private Uzytkownik uzytkownik;
 
 	public UzytkownikRola() {
