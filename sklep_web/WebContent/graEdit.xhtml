@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewAction action="#{graEditBB.onLoad()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Sklep z grami</title>
+</h:head>
+
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+	<p:panel toggleable="true" header="Edycja rekordu">
+
+		<h:form rendered="#{graEditBB.gra != null}">
+			<h:panelGrid columns="5" cellpadding="5">
+
+				<h:outputLabel for="g-nazwa_gry" value="Nazwa gry:" />
+				<p:inputText id="g-nazwa_gry" value="#{graEditBB.gra.nazwa_gry}"
+					required="true" requiredMessage="Podaj nazwę"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="g-nazwa_gry" display="icon"/>
+
+				<h:outputLabel for="g-cena" value="Cena:" />
+				<p:inputText id="g-cena" value="#{graEditGETBB.gra.cena}"
+					required="true" requiredMessage="Podaj cenę">
+					<f:convertNumber type="currency" currencySymbol="zł"/>
+				</p:inputText>
+				<p:message for="g-cena" display="icon"/>
+
+				<h:outputLabel for="g-gatunek" value="Gatunek:" />
+				<p:inputText id="g-gatunek" value="#{graEditGETBB.gra.gatunek}"
+					required="true" requiredMessage="Podaj gatunek gry"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+			    </p:inputText>
+				<p:message for="g-gatunek" display="icon"/>
+				
+				<h:outputLabel for="g-klasyfikacja_wiekowa" value="Klasyfikacja wiekowa:" />
+				<p:inputText id="g-klasyfikacja_wiekowa" value="#{graEditGETBB.gra.klasyfikacja_wiekowa}"
+					required="true" requiredMessage="Podaj klasyfikację wiekową"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+			    </p:inputText>
+				<p:message for="g-klasyfikacja_wiekowa" display="icon"/>
+				
+				<h:outputLabel for="g-producent_gry" value="Producent:" />
+				<p:inputText id="g-producent_gry" value="#{graEditGETBB.gra.producent_gry}"
+					required="true" requiredMessage="Podaj producenta"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+			    </p:inputText>
+				<p:message for="g-producent_gry" display="icon"/>
+				
+			</h:panelGrid>
+
+			<p:messages id="msgs" />
+
+			<p:commandButton value="Zapisz" action="#{graEditBB.saveData()}"
+				style="margin-right: 1em;" update="@form" />
+
+			<p:button value="Anuluj" outcome="graList" />
+		</h:form>
+
+	</p:panel>
+
+</h:body>
+
+</html>

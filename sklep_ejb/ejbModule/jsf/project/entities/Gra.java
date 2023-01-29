@@ -17,7 +17,7 @@ public class Gra implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idGra;
+	private Integer idGra;
 
 	private BigDecimal cena;
 
@@ -39,11 +39,11 @@ public class Gra implements Serializable {
 	public Gra() {
 	}
 
-	public int getIdGra() {
+	public Integer getIdGra() {
 		return this.idGra;
 	}
 
-	public void setIdGra(int idGra) {
+	public void setIdGra(Integer idGra) {
 		this.idGra = idGra;
 	}
 
