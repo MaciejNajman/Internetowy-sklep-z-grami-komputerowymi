@@ -21,6 +21,7 @@ import jsf.project.entities.Gra;
 public class GraListBB {
 	private static final String PAGE_GRA_EDIT = "graEdit?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
+	private static final String PAGE_GRA_BUY = "graBuy?faces-redirect=true";
 
 	private String nazwaGry;
 		
@@ -88,5 +89,12 @@ public class GraListBB {
 	public String deleteGra(Gra gra){
 		graDAO.remove(gra);
 		return PAGE_STAY_AT_THE_SAME;
+	}
+	
+	public String buyGra(Gra gra) {
+		//Pass object through flash 
+		flash.put("gra", gra);
+		
+		return PAGE_GRA_BUY;
 	}
 }

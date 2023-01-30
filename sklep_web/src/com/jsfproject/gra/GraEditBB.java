@@ -35,7 +35,7 @@ public class GraEditBB implements Serializable {
 	@Inject
 	Flash flash;
 
-	public Gra getPerson() {
+	public Gra getGra() {
 		return gra;
 	}
 

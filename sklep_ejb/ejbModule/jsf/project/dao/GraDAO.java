@@ -55,7 +55,7 @@ public class GraDAO {
 		String where = "";
 		String orderby = "order by g.nazwa_gry asc";
 
-		// search for surname
+		// search for nazwa gry
 		String nazwa_gry = (String) searchParams.get("nazwa_gry");
 		if (nazwa_gry != null) {
 			if (where.isEmpty()) {
@@ -78,7 +78,7 @@ public class GraDAO {
 
 		// ... other parameters ... 
 
-		// 4. Execute query and retrieve list of Person objects
+		// 4. Execute query and retrieve list of Gra objects
 		try {
 			list = query.getResultList();
 		} catch (Exception e) {

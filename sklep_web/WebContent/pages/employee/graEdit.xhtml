@@ -31,14 +31,14 @@
 				<p:message for="g-nazwa_gry" display="icon"/>
 
 				<h:outputLabel for="g-cena" value="Cena:" />
-				<p:inputText id="g-cena" value="#{graEditGETBB.gra.cena}"
+				<p:inputText id="g-cena" value="#{graEditBB.gra.cena}"
 					required="true" requiredMessage="Podaj cenę">
 					<f:convertNumber type="currency" currencySymbol="zł"/>
 				</p:inputText>
 				<p:message for="g-cena" display="icon"/>
 
 				<h:outputLabel for="g-gatunek" value="Gatunek:" />
-				<p:inputText id="g-gatunek" value="#{graEditGETBB.gra.gatunek}"
+				<p:inputText id="g-gatunek" value="#{graEditBB.gra.gatunek}"
 					required="true" requiredMessage="Podaj gatunek gry"
 					validatorMessage="co najwyżej 40 znaków">
 					<f:validateLength maximum="40" />
@@ -46,7 +46,7 @@
 				<p:message for="g-gatunek" display="icon"/>
 				
 				<h:outputLabel for="g-klasyfikacja_wiekowa" value="Klasyfikacja wiekowa:" />
-				<p:inputText id="g-klasyfikacja_wiekowa" value="#{graEditGETBB.gra.klasyfikacja_wiekowa}"
+				<p:inputText id="g-klasyfikacja_wiekowa" value="#{graEditBB.gra.klasyfikacja_wiekowa}"
 					required="true" requiredMessage="Podaj klasyfikację wiekową"
 					validatorMessage="co najwyżej 40 znaków">
 					<f:validateLength maximum="40" />
@@ -54,7 +54,7 @@
 				<p:message for="g-klasyfikacja_wiekowa" display="icon"/>
 				
 				<h:outputLabel for="g-producent_gry" value="Producent:" />
-				<p:inputText id="g-producent_gry" value="#{graEditGETBB.gra.producent_gry}"
+				<p:inputText id="g-producent_gry" value="#{graEditBB.gra.producent_gry}"
 					required="true" requiredMessage="Podaj producenta"
 					validatorMessage="co najwyżej 40 znaków">
 					<f:validateLength maximum="40" />
