@@ -5,13 +5,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jsf.project.entities.Gra;
 import jsf.project.entities.Uzytkownik;
 
 @Stateless
@@ -42,9 +39,9 @@ public class UzytkownikDAO {
 		//List<Uzytkownik> list = null;
 		Uzytkownik u = null;
 		
-		Query query = em.createQuery("SELECT u FROM uzytkownik u WHERE u.login=:login AND u.haslo=:pass");
+		Query query = em.createQuery("SELECT u FROM Uzytkownik u WHERE u.login=:login AND u.haslo=:pass");
 		query.setParameter("login", login);
-		query.setParameter("password", pass);
+		query.setParameter("pass", pass);
 		
 		try {
 			//list = query.getResultList();
@@ -58,10 +55,10 @@ public class UzytkownikDAO {
 
 	// retrieving roles of a User from DB
 	public List<String> getUserRolesFromDatabase(Uzytkownik uzytkownik) {
-
+/*
 		ArrayList<String> roles = new ArrayList<String>();
 		int roleId;
-		Query query = em.createQuery("SELECT OBJECT(idRola) FROM uzytkownik_rola AS ur WHERE ur.idUzytkownik=:idU");
+		Query query = em.createQuery("SELECT Rola.idRola FROM UzytkownikRola AS ur WHERE ur.idUzytkownik=:idU");
 		query.setParameter("idU", uzytkownik.getIdUzytkownik());
 		
 		try {
@@ -78,7 +75,19 @@ public class UzytkownikDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+*/
+		ArrayList<String> roles = new ArrayList<String>();
+		
+		if (uzytkownik.getLogin().equals("user")) {
+			roles.add("user");
+		}
+		if (uzytkownik.getLogin().equals("employee")) {
+			roles.add("employee");
+		}
+		if (uzytkownik.getLogin().equals("admin")) {
+			roles.add("admin");
+		}
+	
 		return roles;
 	}
 }

@@ -6,86 +6,91 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<meta charset="utf-8"/>
-	<title>Sklep z grami</title>
-</h:head>
-<h:body style="background-color: #eee; margin: 0.5em;">
+<ui:composition template="/templates/main-template.xhtml">
 
-	<p:panel header="Opcje wyszukiwania" toggleable="true" collapsed="true"
-		style="margin-bottom: 1em;">
-		<h:form>
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel value="Nazwa gry:" />
-				<p:inputText value="#{graListBB.nazwaGry}" />
-				<p:commandButton value="Szukaj" update="form-table" />
-			</h:panelGrid>
-		</h:form>
-	</p:panel>
+<ui:define name="title">
+	#{txtMain.projectName}	
+</ui:define>
 
-	<p:messages />
+	<ui:define name="content">
 
-	<h:form id="form-table" style="margin-bottom:1em;">
+		<p:panel header="#{txtMain.SearchOptions}" toggleable="true"
+			collapsed="true" style="margin-bottom: 1em;">
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel value="#{txtMain.GameName}" />
+					<p:inputText value="#{graListBB.nazwaGry}" />
+					<p:commandButton value="#{txtMain.Search}" update="form-table" />
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
 
-		<p:commandButton value="Dodaj nową grę"
-			action="#{graListBB.newGra()}" style="margin-bottom:1em;"/>
+		<p:messages />
 
-		<p:dataTable value="#{graListBB.list}" var="g">
+		<p:panel header="#{txtMain.GameEdit}" toggleable="true" style="margin-bottom: 1em;">
+			<h:form id="form-table" style="margin-bottom:1em;">
 
-			<p:column priority="5">
-				<f:facet name="header">
-					<h:outputText value="Nazwa gry" />
-				</f:facet>
-				<h:outputText value="#{g.nazwa_gry}" />
-			</p:column>
+				<p:commandButton value="#{txtMain.AddNewGame}"
+					action="#{graListBB.newGra()}" style="margin-bottom:1em;" />
 
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="Cena" />
-				</f:facet>
-				<h:outputText value="#{g.cena}" />
-			</p:column>
+				<p:dataTable value="#{graListBB.list}" var="g">
 
-			<p:column priority="4">
-				<f:facet name="header">
-					<h:outputText value="Gatunek" />
-				</f:facet>
-				<h:outputText value="#{g.gatunek}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="Klasyfikacja wiekowa" />
-				</f:facet>
-				<h:outputText value="#{g.klasyfikacja_wiekowa}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="Producent" />
-				</f:facet>
-				<h:outputText value="#{g.producent_gry}" />
-			</p:column>
+					<p:column priority="5">
+						<f:facet name="header">
+							<h:outputText value="#{txtMain.GameName}" />
+						</f:facet>
+						<h:outputText value="#{g.nazwaGry}" />
+					</p:column>
 
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="Opcje" />
-				</f:facet>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{txtMain.Price}" />
+						</f:facet>
+						<h:outputText value="#{g.cena}" />
+					</p:column>
 
-				<p:commandButton value="Edytuj"
-					action="#{graListBB.editGra(g)}" />
+					<p:column priority="4">
+						<f:facet name="header">
+							<h:outputText value="#{txtMain.Genre}" />
+						</f:facet>
+						<h:outputText value="#{g.gatunek}" />
+					</p:column>
 
-				<p:commandButton value="Usuń"
-					action="#{graListBB.deleteGra(g)}" update="@form" />
-			<!--
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{txtMain.AgeRes}" />
+						</f:facet>
+						<h:outputText value="#{g.klasyfikacjaWiekowa}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{txtMain.Dev}" />
+						</f:facet>
+						<h:outputText value="#{g.producentGry}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{txtMain.Options}" />
+						</f:facet>
+
+						<p:commandButton value="#{txtMain.Edit}" action="#{graListBB.editGra(g)}" style="margin-right: 1em;"/>
+
+						<p:commandButton value="#{txtMain.Delete}" action="#{graListBB.deleteGra(g)}"
+							update="@form" />
+						<!--
 				<p:button outcome="graEditGET" value="Edytuj (GET)">
 					<f:param name="p" value="#{g.idGra}" />
 				</p:button>
 			-->
-			</p:column>
+					</p:column>
 
-		</p:dataTable>
-	</h:form>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
 
-</h:body>
+	</ui:define>
+
+</ui:composition>
 </html>

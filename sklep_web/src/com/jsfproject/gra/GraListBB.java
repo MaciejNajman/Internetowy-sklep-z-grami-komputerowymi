@@ -20,8 +20,8 @@ import jsf.project.entities.Gra;
 @RequestScoped
 public class GraListBB {
 	private static final String PAGE_GRA_EDIT = "graEdit?faces-redirect=true";
-	private static final String PAGE_STAY_AT_THE_SAME = null;
 	private static final String PAGE_GRA_BUY = "graBuy?faces-redirect=true";
+	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private String nazwaGry;
 		

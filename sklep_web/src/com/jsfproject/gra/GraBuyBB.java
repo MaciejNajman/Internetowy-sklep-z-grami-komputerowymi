@@ -20,7 +20,7 @@ import jsf.project.entities.Gra;
 public class GraBuyBB implements Serializable { //na razie to samo co w GraEditBB
 	private static final long serialVersionUID = 1L;
 
-	private static final String PAGE_GRA_LIST = "graList?faces-redirect=true";
+	private static final String PAGE_GRA_ORDER = "graOrder?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private Gra gra = new Gra();
@@ -61,7 +61,7 @@ public class GraBuyBB implements Serializable { //na razie to samo co w GraEditB
 
 	}
 
-	public String saveData() {
+	public String saveZamowienie() { //to zmien na dodawanie zamowienia na dana gre
 		// no Gra object passed
 		if (loaded == null) {
 			return PAGE_STAY_AT_THE_SAME;
@@ -82,6 +82,6 @@ public class GraBuyBB implements Serializable { //na razie to samo co w GraEditB
 			return PAGE_STAY_AT_THE_SAME;
 		}
 
-		return PAGE_GRA_LIST;
+		return PAGE_GRA_ORDER;
 	}
 }

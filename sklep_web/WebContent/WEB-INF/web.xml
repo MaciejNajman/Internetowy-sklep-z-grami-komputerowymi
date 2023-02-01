@@ -15,7 +15,7 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>nova-light</param-value>
 	</context-param>
-		<filter>
+	<filter>
 		<filter-name>SecurityFilter</filter-name>
 		<filter-class>javax.faces.simplesecurity.SecurityFilter</filter-class>
 		<init-param>
@@ -28,9 +28,9 @@
 /javax.faces.resource : PUBLIC;
 /public : PUBLIC;
 /pages : admin;
-/pages/calc : user, manager, admin;
+/pages/user : user, admin, employee;
 /pages/admin : admin;
-/pages/manager : admin, manager;
+/pages/employee : employee, admin;
 			</param-value>
 		</init-param>
 		<init-param>
@@ -58,8 +58,16 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<session-config>
+		<session-timeout>5</session-timeout>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+	<mime-mapping>
+		<extension>ico</extension>
+		<mime-type>image/x-icon</mime-type>
+	</mime-mapping>
 	<welcome-file-list>
-		<welcome-file>login.xhtml</welcome-file>
+		<welcome-file>/pages/login.xhtml</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>

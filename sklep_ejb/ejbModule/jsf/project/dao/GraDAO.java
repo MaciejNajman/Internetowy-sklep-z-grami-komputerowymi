@@ -53,17 +53,17 @@ public class GraDAO {
 		String select = "select g ";
 		String from = "from Gra g ";
 		String where = "";
-		String orderby = "order by g.nazwa_gry asc";
+		String orderby = "order by g.nazwaGry asc";
 
 		// search for nazwa gry
-		String nazwa_gry = (String) searchParams.get("nazwa_gry");
+		String nazwa_gry = (String) searchParams.get("nazwaGry");
 		if (nazwa_gry != null) {
 			if (where.isEmpty()) {
 				where = "where ";
 			} else {
 				where += "and ";
 			}
-			where += "g.nazwa_gry like :nazwa_gry ";
+			where += "g.nazwaGry like :nazwa_gry ";
 		}
 		
 		// ... other parameters ... 

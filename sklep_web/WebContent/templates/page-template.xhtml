@@ -9,14 +9,14 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="title">
-		Sklep z grami
+		#{txtMain.projectName}
 	</ui:define>
 
 	<ui:define name="content">
 
 		<p:panel
-			header="Sklep z grami" toggleable="true" toggleSpeed="500" styleClass="bottom-space">
-			Tu kupisz gry po okazyjnych cenach.
+			header="#{txtMain.projectName}" toggleable="true" toggleSpeed="500" styleClass="bottom-space">
+				#{txtMain.sampleText}
 		</p:panel>
 
 		<ui:insert name="pageContent"></ui:insert>

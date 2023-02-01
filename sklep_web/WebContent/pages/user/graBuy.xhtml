@@ -6,73 +6,40 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<f:metadata>
-    <f:viewAction action="#{graBuyBB.onLoad()}" />
-</f:metadata>
+<ui:composition template="/templates/main-template.xhtml">
 
-<h:head>
-	<meta charset="utf-8"/>
-	<title>Sklep z grami</title>
-</h:head>
+	<f:metadata>
+		<f:viewAction action="#{graBuyBB.onLoad()}" />
+	</f:metadata>
 
-<h:body style="background-color: #eee; margin: 0.5em;">
+<ui:define name="title">
+	#{txtMain.projectName}	
+</ui:define>
 
-	<p:panel toggleable="true" header="Kupowanie gry">
+	<ui:define name="content">
 
-		<h:form rendered="#{graBuyBB.gra != null}">
-			<h:panelGrid columns="5" cellpadding="5">
+		<p:panel toggleable="true" header="#{txtMain.BuyingGame}">
 
-				<h:outputLabel for="g-nazwa_gry" value="Nazwa gry:" />
-				<p:inputText id="g-nazwa_gry" value="#{graBuyBB.gra.nazwa_gry}"
-					required="true" requiredMessage="Podaj nazwę"
-					validatorMessage="co najwyżej 40 znaków">
-					<f:validateLength maximum="40" />
-				</p:inputText>
-				<p:message for="g-nazwa_gry" display="icon"/>
+			
+				<p:panelGrid columns="2" cellpadding="7">
 
-				<h:outputLabel for="g-cena" value="Cena:" />
-				<p:inputText id="g-cena" value="#{graBuyBB.gra.cena}"
-					required="true" requiredMessage="Podaj cenę">
-					<f:convertNumber type="currency" currencySymbol="zł"/>
-				</p:inputText>
-				<p:message for="g-cena" display="icon"/>
+					<h:outputText value="#{txtMain.GameName}" />
+					<h:outputLabel for="g-nazwa_gry" value="#{graBuyBB.gra.nazwaGry}" />
 
-				<h:outputLabel for="g-gatunek" value="Gatunek:" />
-				<p:inputText id="g-gatunek" value="#{graBuyBB.gra.gatunek}"
-					required="true" requiredMessage="Podaj gatunek gry"
-					validatorMessage="co najwyżej 40 znaków">
-					<f:validateLength maximum="40" />
-			    </p:inputText>
-				<p:message for="g-gatunek" display="icon"/>
-				
-				<h:outputLabel for="g-klasyfikacja_wiekowa" value="Klasyfikacja wiekowa:" />
-				<p:inputText id="g-klasyfikacja_wiekowa" value="#{graBuyBB.gra.klasyfikacja_wiekowa}"
-					required="true" requiredMessage="Podaj klasyfikację wiekową"
-					validatorMessage="co najwyżej 40 znaków">
-					<f:validateLength maximum="40" />
-			    </p:inputText>
-				<p:message for="g-klasyfikacja_wiekowa" display="icon"/>
-				
-				<h:outputLabel for="g-producent_gry" value="Producent:" />
-				<p:inputText id="g-producent_gry" value="#{graBuyBB.gra.producent_gry}"
-					required="true" requiredMessage="Podaj producenta"
-					validatorMessage="co najwyżej 40 znaków">
-					<f:validateLength maximum="40" />
-			    </p:inputText>
-				<p:message for="g-producent_gry" display="icon"/>
-				
-			</h:panelGrid>
+					<h:outputText value="#{txtMain.Price}" />
+					<h:outputLabel for="g-cena_gry" value="#{graBuyBB.gra.cena}" />
+					
+				</p:panelGrid>
+				<p:separator style="height:10px;visibility: hidden"/>
+				<p:commandButton value="#{txtMain.Confirm}"
+					action="#{graBuyBB.saveZamowienie()}" style="margin-right: 1em;"/>
 
-			<p:messages id="msgs" />
+				<p:button value="#{txtMain.Cancel}" outcome="pageMain" />
 
-			<p:commandButton value="Potwierdź wybór" action="#{graBuyBB.saveData()}"
-				style="margin-right: 1em;" update="@form" />
+			
+		</p:panel>
 
-			<p:button value="Anuluj" outcome="pageMain" />
-		</h:form>
+	</ui:define>
 
-	</p:panel>
-
-</h:body>
-
+</ui:composition>
 </html>

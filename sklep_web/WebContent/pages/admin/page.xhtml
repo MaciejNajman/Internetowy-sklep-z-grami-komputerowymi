@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
@@ -8,12 +9,12 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 	<ui:define name="title">
-		JSF 05 - strona administratora
+		#{txtMain.AdminPage}
 	</ui:define>
 
 	<ui:define name="content">
 	
-	<p>przykładowa zawartość ...</p>
+	<p>#{txtMain.sampleText}</p>
 
 	</ui:define>
 

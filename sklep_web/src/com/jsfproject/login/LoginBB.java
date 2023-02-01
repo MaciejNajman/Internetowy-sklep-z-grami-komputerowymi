@@ -3,10 +3,12 @@ package com.jsfproject.login;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.simplesecurity.RemoteClient;
@@ -22,13 +24,18 @@ import jsf.project.entities.Uzytkownik;
 @RequestScoped
 public class LoginBB implements Serializable {
 	
-	private static final String PAGE_MAIN = "/pages/pageMain?faces-redirect=true";
+	private static final String PAGE_MAIN = "/pages/user/pageMain?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/pages/login";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 	private static final long serialVersionUID = 1094801825228386363L;
 	
 	private String pass;
 	private String login;
+	
+	// Resource injected
+	@Inject
+	@ManagedProperty("#{txtMain}")
+	private ResourceBundle txtMain;
 
 	public String getPass() {
 		return pass;
@@ -67,9 +74,9 @@ public class LoginBB implements Serializable {
 		RemoteClient<Uzytkownik> client = new RemoteClient<Uzytkownik>(); //create new RemoteClient
 		client.setDetails(uzytkownik);
 		
-		List<String> roles = uzytkownikDAO.getUserRolesFromDatabase(uzytkownik); //get User roles 
+		List<String> roles = uzytkownikDAO.getUserRolesFromDatabase(uzytkownik); //get User roles
 		
-		if (roles != null) { //save roles in RemoteClient
+		if (roles != null) { //save role names in RemoteClient
 			for (String role: roles) {
 				client.getRoles().add(role);
 			}
