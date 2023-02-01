@@ -2,6 +2,7 @@ package com.jsfproject.login;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import jsf.project.dao.UzytkownikDAO;
 import jsf.project.entities.Uzytkownik;
+import jsf.project.entities.UzytkownikRola;
 
 @Named
 @RequestScoped
@@ -76,12 +78,25 @@ public class LoginBB implements Serializable {
 		
 		List<String> roles = uzytkownikDAO.getUserRolesFromDatabase(uzytkownik); //get User roles
 		
+		if (roles == null) {
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Niepoprawna rola", null));
+			return PAGE_LOGIN;
+		}
+		
 		if (roles != null) { //save role names in RemoteClient
 			for (String role: roles) {
-				client.getRoles().add(role);
+			client.getRoles().add(role);
 			}
 		}
-	
+		
+//		List<String> roles = uzytkownik.getUzytkownikRolas();
+//		if (roles != null) {
+//			for (String role: roles) {
+//				client.getRoles().add(role);
+//			}
+//		}
+		
 		//store RemoteClient with request info in session (needed for SecurityFilter)
 		HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
 		client.store(request);

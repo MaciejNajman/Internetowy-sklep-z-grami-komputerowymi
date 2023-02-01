@@ -57,10 +57,10 @@ public class UzytkownikDAO {
 	public List<String> getUserRolesFromDatabase(Uzytkownik uzytkownik) {
 /*
 		ArrayList<String> roles = new ArrayList<String>();
-		int roleId;
-		Query query = em.createQuery("SELECT Rola.idRola FROM UzytkownikRola AS ur WHERE ur.idUzytkownik=:idU");
+		int roleId = 0;
+		Query query = em.createQuery("SELECT UzytkownikRola.rola FROM UzytkownikRola AS r WHERE r.uzytkownik=:idU");
 		query.setParameter("idU", uzytkownik.getIdUzytkownik());
-		
+
 		try {
 			roleId = query.getFirstResult();
 			if (roleId==1) {
@@ -87,7 +87,8 @@ public class UzytkownikDAO {
 		if (uzytkownik.getLogin().equals("admin")) {
 			roles.add("admin");
 		}
-	
+
 		return roles;
 	}
+
 }

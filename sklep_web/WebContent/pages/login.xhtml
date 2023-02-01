@@ -24,7 +24,6 @@
 					<p:password id="pass" value="#{loginBB.pass}" required="true"
 						requiredMessage="#{txtMain.PassRequired}" toggleMask="true"
 						redisplay="true"></p:password>
-					<p:message for="pass"></p:message>
 				</h:panelGrid>
 				<h:panelGrid columns="1" cellpadding="10" width="100%">
 					<p:commandButton id="loginButton" action="#{loginBB.doLogin()}"

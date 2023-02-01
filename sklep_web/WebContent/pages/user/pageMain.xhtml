@@ -30,7 +30,7 @@
 	<p:panel header="#{txtMain.Choose}" toggleable="true" style="margin-bottom: 1em;">
 	<h:form id="form-table" style="margin-bottom:1em;">
 
-		<p:dataTable value="#{graListBB.list}" var="g">
+		<p:dataTable value="#{graListBB.list}" var="g" rows="10" paginator="true">
 
 			<p:column priority="5">
 				<f:facet name="header">

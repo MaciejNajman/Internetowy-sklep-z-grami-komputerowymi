@@ -33,7 +33,7 @@
 				<p:commandButton value="#{txtMain.AddNewGame}"
 					action="#{graListBB.newGra()}" style="margin-bottom:1em;" />
 
-				<p:dataTable value="#{graListBB.list}" var="g">
+				<p:dataTable value="#{graListBB.list}" var="g" rows="10" paginator="true">
 
 					<p:column priority="5">
 						<f:facet name="header">
