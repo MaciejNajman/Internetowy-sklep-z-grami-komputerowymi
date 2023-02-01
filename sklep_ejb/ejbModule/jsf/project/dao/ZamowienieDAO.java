@@ -12,8 +12,10 @@ public class ZamowienieDAO {
 	@PersistenceContext
 	EntityManager em;
 	
-	public void create(Zamowienie zamowienie) {
-		em.persist(zamowienie);
+	public Zamowienie create(Zamowienie zamowienie) {
+		em.persist(zamowienie); //zmiany od prof
+		em.flush();
+		return zamowienie;
 	}
 	
 	public Zamowienie merge(Zamowienie zamowienie) {
@@ -27,4 +29,5 @@ public class ZamowienieDAO {
 	public Zamowienie find(Object id) {
 		return em.find(Zamowienie.class, id);
 	}
+
 }

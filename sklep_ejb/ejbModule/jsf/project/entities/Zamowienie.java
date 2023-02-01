@@ -51,7 +51,7 @@ public class Zamowienie implements Serializable {
 	public Zamowienie() {
 	}
 
-	public int getIdZamowienie() {
+	public Integer getIdZamowienie() {
 		return this.idZamowienie;
 	}
 

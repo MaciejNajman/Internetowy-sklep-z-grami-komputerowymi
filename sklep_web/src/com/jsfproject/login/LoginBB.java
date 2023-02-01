@@ -24,12 +24,11 @@ import jsf.project.entities.UzytkownikRola;
 
 @Named
 @RequestScoped
-public class LoginBB implements Serializable {
+public class LoginBB {
 	
 	private static final String PAGE_MAIN = "/pages/user/pageMain?faces-redirect=true";
-	private static final String PAGE_LOGIN = "/pages/login";
+	private static final String PAGE_LOGIN = "/pages/login?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
-	private static final long serialVersionUID = 1094801825228386363L;
 	
 	private String pass;
 	private String login;
@@ -76,31 +75,23 @@ public class LoginBB implements Serializable {
 		RemoteClient<Uzytkownik> client = new RemoteClient<Uzytkownik>(); //create new RemoteClient
 		client.setDetails(uzytkownik);
 		
-		List<String> roles = uzytkownikDAO.getUserRolesFromDatabase(uzytkownik); //get User roles
+		//List<String> roles = uzytkownikDAO.getUserRolesFromDatabase(uzytkownik); //get User roles
 		
-		if (roles == null) {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Niepoprawna rola", null));
-			return PAGE_LOGIN;
-		}
-		
-		if (roles != null) { //save role names in RemoteClient
-			for (String role: roles) {
-			client.getRoles().add(role);
+		if (uzytkownik.getUzytkownikRolas() != null) { //save role names in RemoteClient od prof
+			for (UzytkownikRola ur: uzytkownik.getUzytkownikRolas()) {
+			client.getRoles().add(ur.getRola().getNazwaRoli());
 			}
 		}
-		
-//		List<String> roles = uzytkownik.getUzytkownikRolas();
-//		if (roles != null) {
-//			for (String role: roles) {
-//				client.getRoles().add(role);
-//			}
-//		}
 		
 		//store RemoteClient with request info in session (needed for SecurityFilter)
 		HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
 		client.store(request);
-
+		
+		//pobranie obiektu uzytkownika do obslugi zamowien i wszystkiego
+//		HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
+//		RemoteClient<Uzytkownik> c = RemoteClient.load(req.getSession());
+//		Uzytkownik u = c.getDetails();
+		
 		// and enter the system (now SecurityFilter will pass the request)
 		return PAGE_MAIN;
 	}

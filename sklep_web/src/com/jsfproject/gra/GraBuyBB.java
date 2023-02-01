@@ -58,30 +58,5 @@ public class GraBuyBB implements Serializable { //na razie to samo co w GraEditB
 			// context.responseComplete();
 			// }
 		}
-
-	}
-
-	public String saveZamowienie() { //to zmien na dodawanie zamowienia na dana gre
-		// no Gra object passed
-		if (loaded == null) {
-			return PAGE_STAY_AT_THE_SAME;
-		}
-
-		try {
-			if (gra.getIdGra() == null) {
-				// new record
-				graDAO.create(gra);
-			} else {
-				// existing record
-				graDAO.merge(gra);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "wystąpił błąd podczas zapisu", null));
-			return PAGE_STAY_AT_THE_SAME;
-		}
-
-		return PAGE_GRA_ORDER;
 	}
 }
