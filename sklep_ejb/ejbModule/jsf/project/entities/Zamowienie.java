@@ -3,6 +3,7 @@ package jsf.project.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -29,9 +30,8 @@ public class Zamowienie implements Serializable {
 	@Column(name="data_realizacji_zamowienia")
 	private Date dataRealizacjiZamowienia;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="data_zlozenia_zamowienia")
-	private Date dataZlozeniaZamowienia;
+	private String dataZlozeniaZamowienia; //typ String ponieważ formatuję datę i zwracam String
 
 	private int zaplacono;
 
@@ -83,11 +83,11 @@ public class Zamowienie implements Serializable {
 		this.dataRealizacjiZamowienia = dataRealizacjiZamowienia;
 	}
 
-	public Date getDataZlozeniaZamowienia() {
+	public String getDataZlozeniaZamowienia() {
 		return this.dataZlozeniaZamowienia;
 	}
 
-	public void setDataZlozeniaZamowienia(Date dataZlozeniaZamowienia) {
+	public void setDataZlozeniaZamowienia(String dataZlozeniaZamowienia) {
 		this.dataZlozeniaZamowienia = dataZlozeniaZamowienia;
 	}
 

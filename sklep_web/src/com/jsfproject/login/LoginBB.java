@@ -87,10 +87,10 @@ public class LoginBB {
 		HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
 		client.store(request);
 		
-		//pobranie obiektu uzytkownika do obslugi zamowien i wszystkiego
-//		HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
-//		RemoteClient<Uzytkownik> c = RemoteClient.load(req.getSession());
-//		Uzytkownik u = c.getDetails();
+		//!!!pobranie obiektu uzytkownika do obslugi zamowien i wszystkiego!!!
+		//HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
+		//RemoteClient<Uzytkownik> c = RemoteClient.load(req.getSession());
+		//Uzytkownik u = c.getDetails();
 		
 		// and enter the system (now SecurityFilter will pass the request)
 		return PAGE_MAIN;

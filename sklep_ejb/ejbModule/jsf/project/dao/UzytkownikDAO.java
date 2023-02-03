@@ -56,7 +56,7 @@ public class UzytkownikDAO {
 		return u;
 	}
 
-	// retrieving roles of a User from DB, tak tez mozna
+	// retrieving roles of a User from DB, tak tez mozna, ale nie wyszlo
 //	public List<String> getUserRolesFromDatabase(Uzytkownik uzytkownik) {
 //
 //		ArrayList<String> roles = new ArrayList<String>();
@@ -81,12 +81,4 @@ public class UzytkownikDAO {
 //		if (rola.getIdRola()==3) {
 //			roles.add("employee");
 //		}
-		/*
-		 * ArrayList<String> roles = new ArrayList<String>();
-		 * 
-		 * if (uzytkownik.getLogin().equals("user")) { roles.add("user"); } if
-		 * (uzytkownik.getLogin().equals("employee")) { roles.add("employee"); } if
-		 * (uzytkownik.getLogin().equals("admin")) { roles.add("admin"); }
-		 */
-
 }

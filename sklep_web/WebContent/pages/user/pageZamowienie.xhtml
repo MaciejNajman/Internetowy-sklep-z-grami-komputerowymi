@@ -8,15 +8,44 @@
 
 <ui:composition template="/templates/main-template.xhtml">
 
-<ui:define name="title">
+	<f:metadata>
+		<f:viewAction action="#{zamowienieBB.onLoad()}" />
+	</f:metadata>
+
+	<ui:define name="title">
 	#{txtMain.projectName}	
 </ui:define>
 
 	<ui:define name="content">
 
 		<p:messages />
-		
-		<p:panel>zamowienie
+
+		<p:panel toggleable="true" header="#{txtMain.Ordering}">
+
+
+			<p:panelGrid columns="2" cellpadding="7">
+
+				<h:outputText value="#{txtMain.OrderDate}" />
+				<h:outputLabel for="z-data"
+					value="#{zamowienieBB.zamowienie.dataZlozeniaZamowienia}" />
+
+				<h:outputText value="#{txtMain.OrderReceived}" />
+				<h:outputLabel for="z-czy_przyjeto"
+					value="#{zamowienieBB.zamowienie.czyPrzyjetoZamowienie}" />
+
+			</p:panelGrid>
+
+			<h:form>
+
+				<p:separator style="height:10px;visibility: hidden" />
+
+				<p:commandButton value="#{txtMain.OrderConfirm}"
+					action="#{zamowienieBB.saveOrder()}" style="margin-right: 1em;" />
+
+				<p:button value="#{txtMain.Cancel}" outcome="pageMain" />
+
+			</h:form>
+
 		</p:panel>
 
 	</ui:define>
