@@ -12,8 +12,10 @@ public class GraHasZamowienieDAO {
 	@PersistenceContext
 	EntityManager em;
 	
-	public void create(GraHasZamowienie graHasZamowienie) {
-		em.persist(graHasZamowienie);
+	public GraHasZamowienie create(GraHasZamowienie graHasZamowienie) {
+		em.persist(graHasZamowienie); //zmiany z zamowienieDAO
+		em.flush();
+		return graHasZamowienie;
 	}
 	
 	public GraHasZamowienie merge(GraHasZamowienie graHasZamowienie) {

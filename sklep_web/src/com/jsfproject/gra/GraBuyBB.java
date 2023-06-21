@@ -25,14 +25,13 @@ import jsf.project.entities.Zamowienie;
 
 @Named
 @ViewScoped
-public class GraBuyBB implements Serializable { //na razie to samo co w GraEditBB
+public class GraBuyBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String PAGE_ORDER = "pageZamowienie?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private Gra gra = new Gra();
-	private GraHasZamowienie graHasZamowieny = new GraHasZamowienie();
 	private Gra loaded = null;
 
 	@EJB
@@ -83,11 +82,17 @@ public class GraBuyBB implements Serializable { //na razie to samo co w GraEditB
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedDateTime = localDateTime.format(myFormatObj);
 		z.setDataZlozeniaZamowienia(formattedDateTime);
-		z.setCzyPrzyjetoZamowienie((byte)0);
+		z.setCzyPrzyjetoZamowienie((byte)1);
 		z.setUzytkownik(u);
+		
+		//Dodawanie gry do zamowienia
+		//GraHasZamowienie graHasZamowienia = new GraHasZamowienie();
+		//graHasZamowienia.setGra((Gra)flash.get("gra"));
+		//graHasZamowienia.setZamowienie(z);
 		
 		//Pass object through flash	
 		flash.put("zamowienie", z);
+		//flash.put("graHasZamowienie", graHasZamowienia);
 		
 		return PAGE_ORDER;
 	}

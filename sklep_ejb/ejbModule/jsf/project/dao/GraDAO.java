@@ -32,6 +32,22 @@ public class GraDAO {
 		return em.find(Gra.class, id);
 	}
 	
+//	public List<Gra> getLazyList(int first, int pageSize) {
+//		List<Gra> list = null;
+//
+//		Query query = em.createQuery("select g from Gra g");
+//
+//		try {
+//			query.setFirstResult(first);
+//			query.setMaxResults(pageSize);
+//			list = query.getResultList();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return list;
+//	}
+	
 	public List<Gra> getFullList() {
 		List<Gra> list = null;
 
