@@ -9,13 +9,13 @@
 <ui:composition template="/templates/main-template.xhtml">
 
 <ui:define name="title">
-	#{txtMain.projectName}	
+	#{txtMain.EmployeePage}
 </ui:define>
 
 	<ui:define name="content">
 
 		<p:panel header="#{txtMain.SearchOptions}" toggleable="true"
-			collapsed="true" style="margin-bottom: 1em;">
+			collapsed="false" style="margin-bottom: 1em;">
 			<h:form>
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel value="#{txtMain.GameName}" />
@@ -33,7 +33,7 @@
 				<p:commandButton value="#{txtMain.AddNewGame}"
 					action="#{graListBB.newGra()}" style="margin-bottom:1em;" />
 
-				<p:dataTable value="#{graListBB.list}" var="g" rows="10" paginator="true">
+				<p:dataTable value="#{graListBB.list}" var="g" rows="10" paginator="true" paginatorPosition="bottom">
 
 					<p:column priority="5">
 						<f:facet name="header">

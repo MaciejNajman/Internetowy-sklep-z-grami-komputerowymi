@@ -7,11 +7,11 @@
 	
 	<p:panel header="#{txtMain.Footer}" toggleable="true" toggleSpeed="500">
 		<h:form>
-			<h:commandLink action="/pages/user/pageMain?faces-redirect=true" value="#{txtMain.StorePage}" /> | 
-			<h:commandLink action="/pages/employee/graList?faces-redirect=true" value="#{txtMain.EmployeePage}" /> | 
-			<h:commandLink action="/pages/admin/page?faces-redirect=true" value="#{txtMain.AdminPage}" /> 
+			<h:commandLink id="storePage" action="/pages/user/pageMain?faces-redirect=true" value="#{txtMain.StorePage}" /> | 
+			<h:commandLink id="employeePage" action="/pages/employee/graList?faces-redirect=true" value="#{txtMain.EmployeePage}" /> | 
+			<h:commandLink id="adminPage" action="/pages/admin/page?faces-redirect=true" disabled="true" value="#{txtMain.AdminPage}" /> 
 		</h:form>
-		<p>© 2022/2023 Internetowy sklep z grami komputerowymi</p>
+		<p>© 2023/2024 Internetowy sklep z grami komputerowymi</p>
 	</p:panel>
 
 </ui:composition>
