@@ -1,19 +1,105 @@
-body{
-	font-family: 'Century Gothic',helvetica,verdana,arial;
-	background: url("../img/milky-way-2695569_1920.jpg.xhtml?ln=template") no-repeat center center fixed;
-	background-size: cover;
-	margin:0;
+@font-face {
+	font-family: 'Audiowide';
+	src: url('../fonts/Audiowide-Regular.woff2') format('woff2'),
+		url('../fonts/Audiowide-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-.bottom-space{
+
+body {
+	font-family: 'Century Gothic', helvetica, verdana, arial;
+	background: url("../img/milky-way-2695569_1920.jpg.xhtml?ln=template") no-repeat center center fixed;
+	background-size: cover;
+	margin: 0;
+}
+
+.bottom-space {
 	margin-bottom: 2em;
 }
 
-.top-space{
+.top-space {
 	margin-top: 1em;
 }
 
-#page_wrapper{
+#page_wrapper {
 	margin: 1em;
 	min-width: 700px;
+}
+
+#loginPage {
+	background-image: url('../img/loginBackground.jpg.xhtml?ln=template');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center center;
+}
+
+.loginHeader {
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+#loginHeaderH1 {
+	font-size: 50px;
+	color: #fff;
+	font-family: 'Audiowide', helvetica, verdana, arial;
+	/*font not changing*/
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 3px;
+	margin: 0 auto;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+.loginFormDesign {
+	width: 36%;
+	margin: 0 auto;
+}
+
+.loginDiv {
+	display:block;
+	padding: 50px 40px;
+	text-align: center;
+	margin: 0px;
+	background: rgba(23, 218, 218, 0.18);
+	color: #000;
+	margin: 0 auto;
+}
+
+.loginDiv input[type="text"],
+.loginDiv input[type="password"] {
+	box-sizing: border-box;
+	padding: 13px 10px;
+	width: 92.5%;
+	font-size: 16px;
+	outline: none;
+	background: transparent;
+	border: 0px;
+	border-bottom: 1px solid #fff;
+	border-radius: 0px;
+	letter-spacing: 1.6px;
+	color: #fff;
+}
+
+.loginDiv .ui-button {
+	box-sizing: border-box;
+	font-size: 18px;
+	padding: 10px 20px;
+	letter-spacing: 1.2px;
+	border: none;
+	text-transform: capitalize;
+	outline: none;
+	color: #fff;
+	cursor: pointer;
+	margin: 0 auto;
+	background-color: #006A4E;
+	transition: background-color 0.5s ease-in;
+}
+
+.loginDiv .ui-button  a:hover{
+	background-color: #32DE84;
 }

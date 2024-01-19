@@ -66,7 +66,7 @@ public class LoginBB {
 		// 2. if bad login or password - stay with error info
 		if (uzytkownik == null) {
 			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Niepoprawny login lub hasło", null));
+					"#{txtMain.WrongLoginOrPass}", null));
 			return PAGE_STAY_AT_THE_SAME;
 		}
 
