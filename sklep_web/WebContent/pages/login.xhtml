@@ -15,24 +15,17 @@
 		<div class="loginFormDesign">
 			<h:form id="loginForm" class="loginDiv">
 				<p:growl id="msg" showDetail="false" life="4000" />
-				<!-- <p:panel id="loginPnl" header="#{txtMain.LoginTitle}"
-						style="width: 350px; margin: 0 auto;"> -->
-				<!-- <h:panelGrid id="loginPanel" columns="2" cellpadding="5"> -->
-				<!-- <h:outputText value="#{txtMain.Login}" /> -->
-				<p:inputText id="login" value="#{loginBB.login}" required="true"
-					requiredMessage="#{txtMain.LoginRequired}"
-					placeholder="#{txtMain.Login}"></p:inputText>
-				<!-- <h:outputText value="#{txtMain.Pass}" /> -->
-				<p:password id="pass" value="#{loginBB.pass}" required="true"
-					requiredMessage="#{txtMain.PassRequired}" toggleMask="true"
-					redisplay="true" placeholder="#{txtMain.Pass}"></p:password>
-				<!-- </h:panelGrid> -->
-				<!-- <h:panelGrid columns="1" cellpadding="10" width="100%"> -->
+				<h:panelGrid columns="2" id="loginGrid" style="margin: 0 auto;">
+					<p:inputText id="login" value="#{loginBB.login}" required="true"
+						requiredMessage="#{txtMain.LoginRequired}"
+						placeholder="#{txtMain.Login}"></p:inputText>
+					<p:password id="pass" value="#{loginBB.pass}" required="true"
+						requiredMessage="#{txtMain.PassRequired}" toggleMask="true"
+						redisplay="true" placeholder="#{txtMain.Pass}"></p:password>
+				</h:panelGrid>
 				<p:commandButton id="loginButton" action="#{loginBB.doLogin()}"
-					value="#{txtMain.LogIn}" update="loginForm" ajax="true">
+					value="#{txtMain.LogIn}" update="loginForm" ajax="true" style="margin-top: 15px">
 				</p:commandButton>
-				<!-- </h:panelGrid> -->
-				<!-- </p:panel> -->
 			</h:form>
 		</div>
 	</ui:define>

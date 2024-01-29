@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -105,6 +106,8 @@ public class GraListBB {
 	}
 
 	public String deleteGra(Gra gra) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuń grę", "Gra została usunięta");
+		FacesContext.getCurrentInstance().addMessage(PAGE_GRA_BUY, msg);
 		graDAO.remove(gra);
 		return PAGE_STAY_AT_THE_SAME;
 	}

@@ -4,13 +4,16 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-	<p:panel header="#{txtMain.Title}" toggleable="true" styleClass="bottom-space">
+	<p:panel header="#{txtMain.Title}" toggleable="true"
+		styleClass="bottom-space">
 		<h:panelGrid columns="3" cellpadding="10">
 			<ui:insert name="title">...</ui:insert>
 			<h:form>
-				<p:commandButton id="logout" value="#{txtMain.LogOut}" action="#{loginBB.doLogout()}" styleClass="rounded-button ui-button-secondary" icon="pi pi-sign-out"/>
+				<p:commandButton id="logout" value="#{txtMain.LogOut}"
+					action="#{loginBB.doLogout()}"
+					styleClass="rounded-button ui-button-secondary"
+					icon="pi pi-sign-out" />
 			</h:form>
-        	<p:clock/>
 		</h:panelGrid>
 	</p:panel>
 </ui:composition>

@@ -8,7 +8,7 @@
 
 <ui:composition template="/templates/main-template.xhtml">
 
-<ui:define name="title">
+	<ui:define name="title">
 	#{txtMain.EmployeePage}
 </ui:define>
 
@@ -27,13 +27,15 @@
 
 		<p:messages />
 
-		<p:panel header="#{txtMain.GameEdit}" toggleable="true" style="margin-bottom: 1em;">
+		<p:panel header="#{txtMain.GameEdit}" toggleable="true"
+			style="margin-bottom: 1em;">
 			<h:form id="form-table" style="margin-bottom:1em;">
 
 				<p:commandButton value="#{txtMain.AddNewGame}"
 					action="#{graListBB.newGra()}" style="margin-bottom:1em;" />
 
-				<p:dataTable value="#{graListBB.list}" var="g" rows="10" paginator="true" paginatorPosition="bottom">
+				<p:dataTable value="#{graListBB.list}" var="g" rows="10"
+					paginator="true" paginatorPosition="bottom">
 
 					<p:column priority="5">
 						<f:facet name="header">
@@ -75,15 +77,21 @@
 							<h:outputText value="#{txtMain.Options}" />
 						</f:facet>
 
-						<p:commandButton value="#{txtMain.Edit}" action="#{graListBB.editGra(g)}" style="margin-right: 1em;"/>
+						<p:commandButton value="#{txtMain.Edit}"
+							action="#{graListBB.editGra(g)}" style="margin-right: 1em;" />
 
-						<p:commandButton value="#{txtMain.Delete}" action="#{graListBB.deleteGra(g)}"
-							update="@form" />
-						<!--
-				<p:button outcome="graEditGET" value="Edytuj (GET)">
-					<f:param name="p" value="#{g.idGra}" />
-				</p:button>
-			-->
+						<p:growl id="msgDelete" showDetail="true" life="4000" />
+						<p:commandButton value="#{txtMain.Delete}"
+							action="#{graListBB.deleteGra(g)}" update="@form">
+							<p:confirm header="#{txtMain.Conf}"
+								message="#{txtMain.ConfirmDelete}" icon="pi pi-exclamation-triangle" />
+						</p:commandButton>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="#{txtMain.Yes}" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="#{txtMain.No}" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
 					</p:column>
 
 				</p:dataTable>

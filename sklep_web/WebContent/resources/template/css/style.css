@@ -4,6 +4,7 @@
 		url('../fonts/Audiowide-Regular.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-display: optional;
 }
 
 
@@ -44,7 +45,6 @@ body {
 	font-size: 50px;
 	color: #fff;
 	font-family: 'Audiowide', helvetica, verdana, arial;
-	/*font not changing*/
 	font-weight: normal;
 	font-style: normal;
 	letter-spacing: 3px;
@@ -60,8 +60,12 @@ body {
 	margin: 0 auto;
 }
 
+body .ui-input-icon-right > i:last-of-type {
+    color: #ffffff;
+}
+
 .loginDiv {
-	display:block;
+	display: block;
 	padding: 50px 40px;
 	text-align: center;
 	margin: 0px;
@@ -83,23 +87,4 @@ body {
 	border-radius: 0px;
 	letter-spacing: 1.6px;
 	color: #fff;
-}
-
-.loginDiv .ui-button {
-	box-sizing: border-box;
-	font-size: 18px;
-	padding: 10px 20px;
-	letter-spacing: 1.2px;
-	border: none;
-	text-transform: capitalize;
-	outline: none;
-	color: #fff;
-	cursor: pointer;
-	margin: 0 auto;
-	background-color: #006A4E;
-	transition: background-color 0.5s ease-in;
-}
-
-.loginDiv .ui-button  a:hover{
-	background-color: #32DE84;
 }
