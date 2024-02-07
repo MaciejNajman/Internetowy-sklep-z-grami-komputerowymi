@@ -51,7 +51,7 @@ public class Uzytkownik implements Serializable {
 	public Uzytkownik() {
 	}
 
-	public int getIdUzytkownik() {
+	public Integer getIdUzytkownik() {
 		return this.idUzytkownik;
 	}
 

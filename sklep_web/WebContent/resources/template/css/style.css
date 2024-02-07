@@ -7,7 +7,6 @@
 	font-display: optional;
 }
 
-
 body {
 	font-family: 'Century Gothic', helvetica, verdana, arial;
 	background: url("../img/milky-way-2695569_1920.jpg.xhtml?ln=template") no-repeat center center fixed;
@@ -60,6 +59,16 @@ body {
 	margin: 0 auto;
 }
 
+.loginFormDesign input:-webkit-autofill,
+.loginFormDesign input:-webkit-autofill:hover, 
+.loginFormDesign input:-webkit-autofill:focus, 
+.loginFormDesign input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 2000s ease-in-out 0s;
+    caret-color: #fff
+}
+
 body .ui-input-icon-right > i:last-of-type {
     color: #ffffff;
 }
@@ -70,12 +79,14 @@ body .ui-input-icon-right > i:last-of-type {
 	text-align: center;
 	margin: 0px;
 	background: rgba(23, 218, 218, 0.18);
-	color: #000;
+	color: #fff;
 	margin: 0 auto;
 }
 
 .loginDiv input[type="text"],
-.loginDiv input[type="password"] {
+.loginDiv input[type="password"],
+.loginDiv input[type="email"],
+.loginDiv input[type="tel"] {
 	box-sizing: border-box;
 	padding: 13px 10px;
 	width: 92.5%;

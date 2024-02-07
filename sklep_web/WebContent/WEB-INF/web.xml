@@ -27,6 +27,8 @@
 			<param-value>
 /javax.faces.resource : PUBLIC;
 /public : PUBLIC;
+/pages/login.xhtml : PUBLIC;
+/pages/register.xhtml : PUBLIC;
 /pages : admin;
 /pages/user : user, admin, employee;
 /pages/admin : admin;

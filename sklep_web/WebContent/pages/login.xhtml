@@ -24,7 +24,12 @@
 						redisplay="true" placeholder="#{txtMain.Pass}"></p:password>
 				</h:panelGrid>
 				<p:commandButton id="loginButton" action="#{loginBB.doLogin()}"
-					value="#{txtMain.LogIn}" update="loginForm" ajax="true" style="margin-top: 15px">
+					value="#{txtMain.LogIn}" update="loginForm" ajax="true"
+					style="margin-top: 15px">
+				</p:commandButton>
+				<p:commandButton id="registerButton" action="#{loginBB.registerNewUser()}"
+					value="#{txtMain.Register}" immediate="true"
+					style="margin-top: 15px; margin-left: 20px;">
 				</p:commandButton>
 			</h:form>
 		</div>

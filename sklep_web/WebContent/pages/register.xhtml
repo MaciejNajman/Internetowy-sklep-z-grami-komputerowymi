@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/login-template.xhtml">
+
+<!-- 	<f:metadata>
+		<f:viewAction action="#{rejestracjaBB.onLoad()}" />
+	</f:metadata> -->
+
+	<ui:define name="content">
+		<div class="loginHeader">
+			<h1 id="loginHeaderH1">#{txtMain.WelcomeText}</h1>
+		</div>
+		<div class="loginFormDesign">
+			<h:form id="registrationForm" class="loginDiv"
+				rendered="#{rejestracjaBB.uzytkownik != null}">
+				<p:growl id="msg" showDetail="true" life="4000" />
+				<h:panelGrid id="registerGrid" header="Registration Form"
+					columns="2" style="margin: 0 auto;">
+
+					<p:outputLabel for="u-login" value="#{txtMain.Login}" />
+					<p:inputText id="u-login" value="#{rejestracjaBB.uzytkownik.login}"
+						required="true" requiredMessage="#{txtMain.LoginRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<p:outputLabel for="u-password" value="#{txtMain.Pass}" />
+					<p:password id="u-password"
+						value="#{rejestracjaBB.uzytkownik.haslo}" required="true"
+						requiredMessage="#{txtMain.PassRequired}"
+						validatorMessage="#{txtMain.MaxForty}" toggleMask="true"
+						redisplay="true">
+						<f:validateLength maximum="40" />
+					</p:password>
+
+					<p:outputLabel for="u-firstName" value="#{txtMain.FirstName}" />
+					<p:inputText id="u-firstName"
+						value="#{rejestracjaBB.uzytkownik.imie}" required="true"
+						requiredMessage="#{txtMain.FirstNameRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<p:outputLabel for="u-lastName" value="#{txtMain.LastName}" />
+					<p:inputText id="u-lastName"
+						value="#{rejestracjaBB.uzytkownik.nazwisko}" required="true"
+						requiredMessage="#{txtMain.LastNameRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<p:outputLabel for="u-email" value="#{txtMain.Email}" />
+					<p:inputText id="u-email" type="email"
+						value="#{rejestracjaBB.uzytkownik.email}" required="true"
+						requiredMessage="#{txtMain.EmailRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<p:outputLabel for="u-phoneNumber" value="#{txtMain.PhoneNumber}" />
+					<p:inputText id="u-phoneNumber" type="tel"
+						value="#{rejestracjaBB.uzytkownik.nrTel}" required="true"
+						requiredMessage="#{txtMain.PhoneNumberRequired}"
+						validatorMessage="#{txtMain.MaxTwenty}">
+						<f:validateLength maximum="20" />
+					</p:inputText>
+
+				</h:panelGrid>
+				<p:separator style="height:10px;visibility: hidden" />
+
+				<p:commandButton id="registerButton" value="#{txtMain.Register}"
+					action="#{rejestracjaBB.saveRegisteredUser()}"
+					style="margin-right: 1em;" update="@form" ajax="true"/>
+
+				<p:button value="#{txtMain.return}" outcome="login" />
+
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -5,13 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import jsf.project.entities.Uzytkownik;
-import jsf.project.entities.UzytkownikRola;
-import jsf.project.entities.Rola;
 
 @Stateless
 public class UzytkownikDAO {

@@ -78,7 +78,7 @@ public class GraEditBB implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "wystąpił błąd podczas zapisu", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu", null));
 			return PAGE_STAY_AT_THE_SAME;
 		}
 

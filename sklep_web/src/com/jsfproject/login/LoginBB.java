@@ -1,9 +1,5 @@
 package com.jsfproject.login;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
@@ -11,7 +7,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.simplesecurity.RemoteClient;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,6 +27,7 @@ public class LoginBB {
 	private static final String PAGE_MAIN = "/pages/user/pageMain?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/pages/login?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
+	private static final String PAGE_REGISTER = "/pages/register?faces-redirect=true";
 
 	private String pass;
 	private String login;
@@ -37,6 +36,13 @@ public class LoginBB {
 	@Inject
 	@ManagedProperty("#{txtMain}")
 	private ResourceBundle txtMain;
+
+	@Inject
+	Flash flash;
+	@Inject
+	ExternalContext extcontext;
+	@EJB
+	UzytkownikDAO uzytkownikDAO;
 
 	public String getPass() {
 		return pass;
@@ -53,9 +59,6 @@ public class LoginBB {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
-	@EJB
-	UzytkownikDAO uzytkownikDAO;
 
 	public String doLogin() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
@@ -104,5 +107,17 @@ public class LoginBB {
 		// - new session will be created (with new ID)
 		session.invalidate();
 		return PAGE_LOGIN;
+	}
+
+	public String registerNewUser() {
+		Uzytkownik uzytkownik = new Uzytkownik();
+		// 1. Pass object through session
+		// HttpSession session = (HttpSession) extcontext.getSession(true);
+		// session.setAttribute("uzytkownik", uzytkownik);
+
+		// 2. Pass object through flash
+		flash.put("uzytkownik", uzytkownik);
+
+		return PAGE_REGISTER;
 	}
 }
