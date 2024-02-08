@@ -11,17 +11,10 @@ import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletRequest;
-import javax.faces.simplesecurity.RemoteClient;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.ManagedProperty;
 
 import jsf.project.dao.ZamowienieDAO;
 import jsf.project.dao.GraHasZamowienieDAO;
 import jsf.project.entities.Zamowienie;
-import jsf.project.entities.Gra;
-import jsf.project.entities.Uzytkownik;
 import jsf.project.entities.GraHasZamowienie;
 
 @Named

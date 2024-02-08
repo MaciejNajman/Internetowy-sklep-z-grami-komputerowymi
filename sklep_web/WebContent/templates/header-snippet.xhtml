@@ -7,7 +7,7 @@
 	<p:panel header="#{txtMain.Title}" toggleable="true"
 		styleClass="bottom-space">
 		<h:panelGrid columns="3" cellpadding="10">
-			<ui:insert name="title">...</ui:insert>
+			<h:outputText value="Zalogowano: #{remoteClient.details.imie} #{remoteClient.details.nazwisko}" />
 			<h:form>
 				<p:commandButton id="logout" value="#{txtMain.LogOut}"
 					action="#{loginBB.doLogout()}"

@@ -1,7 +1,9 @@
 package com.jsfproject.rejestracja;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
@@ -45,39 +47,41 @@ public class RejestracjaBB {
 		return uzytkownik;
 	}
 
-	public void onLoad() throws IOException {
-		// 1. load uzytkownik passed through session
-		// HttpSession session = (HttpSession)
-		// context.getExternalContext().getSession(true);
-		// loaded = (Uzytkownik) session.getAttribute("uzytkownik");
+//	public void onLoad() throws IOException {
+//		// 1. load uzytkownik passed through session
+//		// HttpSession session = (HttpSession)
+//		// context.getExternalContext().getSession(true);
+//		// loaded = (Uzytkownik) session.getAttribute("uzytkownik");
+//
+//		// 2. load uzytkownik passed through flash
+//		loaded = (Uzytkownik) flash.get("uzytkownik");
+//
+//		//cleaning: attribute received => delete it from session
+//		if (loaded != null) {
+//			uzytkownik = loaded;
+//		} else {
+//			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędne użycie systemu", null));
+//		}
+//	}
 
-		// 2. load uzytkownik passed through flash
-		loaded = (Uzytkownik) flash.get("uzytkownik");
-
-		//cleaning: attribute received => delete it from session
-		if (loaded != null) {
-			uzytkownik = loaded;
-		} else {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędne użycie systemu", null));
-		}
-	}
-	
 	public void addDefaultUserRoleForNewCustomer() {
-		UzytkownikRola r = new UzytkownikRola();
+		UzytkownikRola ur = new UzytkownikRola();
 		Date now = new Date();
-		r.setKiedyNadanoRole(now);
-		r.setUzytkownik(uzytkownik);
-		uzytkownik.addUzytkownikRola(r);
+		ur.setKiedyNadanoRole(now);
+		ur.setUzytkownik(uzytkownik);
+		List<UzytkownikRola> urList = new ArrayList<>(3);
+		urList.add(ur);
+		uzytkownik.setUzytkownikRolas(urList);
 	}
 
 	public String saveRegisteredUser() {
 		// no Uzytkownik object passed
-		if (loaded == null) {
-			return PAGE_STAY_AT_THE_SAME;
-		}
-		
+//		if (loaded == null) {
+//			return PAGE_STAY_AT_THE_SAME;
+//		}
+
 		addDefaultUserRoleForNewCustomer();
-		
+
 		try {
 			if (uzytkownik.getIdUzytkownik() == null) {
 				// new record

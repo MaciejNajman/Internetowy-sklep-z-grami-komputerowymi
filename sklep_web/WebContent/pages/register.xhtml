@@ -65,8 +65,7 @@
 
 					<p:outputLabel for="u-phoneNumber" value="#{txtMain.PhoneNumber}" />
 					<p:inputText id="u-phoneNumber" type="tel"
-						value="#{rejestracjaBB.uzytkownik.nrTel}" required="true"
-						requiredMessage="#{txtMain.PhoneNumberRequired}"
+						value="#{rejestracjaBB.uzytkownik.nrTel}" required="false"
 						validatorMessage="#{txtMain.MaxTwenty}">
 						<f:validateLength maximum="20" />
 					</p:inputText>
@@ -76,7 +75,7 @@
 
 				<p:commandButton id="registerButton" value="#{txtMain.Register}"
 					action="#{rejestracjaBB.saveRegisteredUser()}"
-					style="margin-right: 1em;" update="@form" ajax="true"/>
+					style="margin-right: 1em;" update="registrationForm" ajax="true"/>
 
 				<p:button value="#{txtMain.return}" outcome="login" />
 

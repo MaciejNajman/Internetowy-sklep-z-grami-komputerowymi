@@ -15,11 +15,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import jsf.project.dao.GraDAO;
 import jsf.project.entities.Gra;
-import jsf.project.entities.GraHasZamowienie;
 import jsf.project.entities.Uzytkownik;
 import jsf.project.entities.Zamowienie;
 
@@ -79,10 +77,15 @@ public class GraBuyBB implements Serializable {
 		//Tworzenie nowego zamowienia
 		Zamowienie z = new Zamowienie();
 		LocalDateTime localDateTime = LocalDateTime.now();
+		LocalDateTime localDateTimePlusOneDay = localDateTime.plusDays(1);
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedDateTime = localDateTime.format(myFormatObj);
+		String formattedLocalDateTimePlusOneDay = localDateTimePlusOneDay.format(myFormatObj);
 		z.setDataZlozeniaZamowienia(formattedDateTime);
 		z.setCzyPrzyjetoZamowienie((byte)1);
+		z.setZaplacono(100);
+		z.setCzyZamowienieZrealizowano((byte)1);
+		z.setDataRealizacjiZamowienia(formattedLocalDateTimePlusOneDay);
 		z.setUzytkownik(u);
 		
 		//Dodawanie gry do zamowienia

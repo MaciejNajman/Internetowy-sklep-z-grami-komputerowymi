@@ -110,13 +110,14 @@ public class LoginBB {
 	}
 
 	public String registerNewUser() {
-		Uzytkownik uzytkownik = new Uzytkownik();
+		//Tworzenie nowego uzytkownika
+		//Uzytkownik uzytkownik = new Uzytkownik();
 		// 1. Pass object through session
 		// HttpSession session = (HttpSession) extcontext.getSession(true);
 		// session.setAttribute("uzytkownik", uzytkownik);
 
 		// 2. Pass object through flash
-		flash.put("uzytkownik", uzytkownik);
+		//flash.put("uzytkownik", uzytkownik);
 
 		return PAGE_REGISTER;
 	}

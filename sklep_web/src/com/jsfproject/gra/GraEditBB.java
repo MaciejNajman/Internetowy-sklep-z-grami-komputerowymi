@@ -10,7 +10,6 @@ import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 
 import jsf.project.dao.GraDAO;
 import jsf.project.entities.Gra;
