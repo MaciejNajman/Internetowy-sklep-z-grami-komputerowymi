@@ -14,6 +14,7 @@ public class UzytkownikRolaDAO {
 	
 	public void create(UzytkownikRola uzytkownikRola) {
 		em.persist(uzytkownikRola);
+		em.flush();
 	}
 	
 	public UzytkownikRola merge(UzytkownikRola uzytkownikRola) {

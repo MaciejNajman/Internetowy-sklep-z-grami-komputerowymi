@@ -1,9 +1,6 @@
 package com.jsfproject.rejestracja;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
@@ -11,14 +8,19 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import jsf.project.dao.RolaDAO;
 import jsf.project.dao.UzytkownikDAO;
+import jsf.project.dao.UzytkownikRolaDAO;
+import jsf.project.entities.Rola;
 import jsf.project.entities.Uzytkownik;
 import jsf.project.entities.UzytkownikRola;
+import jsf.project.entities.UzytkownikRolaPK;
 
 @Named
 @RequestScoped
@@ -27,13 +29,19 @@ public class RejestracjaBB {
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private Uzytkownik uzytkownik = new Uzytkownik();
-	private Uzytkownik loaded = null;
 
 	@EJB
 	UzytkownikDAO uzytkownikDAO;
+	@EJB
+	UzytkownikRolaDAO uzytkownikRolaDAO;
+	@EJB
+	RolaDAO rolaDAO;
 
 	@Inject
 	FacesContext context;
+
+	@Inject
+	ExternalContext extcontext;
 
 	@Inject
 	Flash flash;
@@ -64,24 +72,32 @@ public class RejestracjaBB {
 //		}
 //	}
 
-	public void addDefaultUserRoleForNewCustomer() {
-		UzytkownikRola ur = new UzytkownikRola();
+	public void addDefaultUserRoleForNewCustomer(Uzytkownik uzytkownik) {
+		Rola r = getRoleByNameFromDB("user");
+
+		UzytkownikRolaPK key = new UzytkownikRolaPK(uzytkownik.getIdUzytkownik(), r.getIdRola());
+		UzytkownikRola entity = new UzytkownikRola();
+		entity.setCompositeKey(key);
+		
 		Date now = new Date();
-		ur.setKiedyNadanoRole(now);
-		ur.setUzytkownik(uzytkownik);
-		List<UzytkownikRola> urList = new ArrayList<>(3);
-		urList.add(ur);
-		uzytkownik.setUzytkownikRolas(urList);
+		entity.setKiedyNadanoRole(now);
+
+		try {
+			if (entity.getCompositeKey() != null) {
+				// new record
+				uzytkownikRolaDAO.create(entity);
+			} else {
+				// existing record
+				uzytkownikRolaDAO.merge(entity);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu roli", null));
+		}
 	}
 
 	public String saveRegisteredUser() {
-		// no Uzytkownik object passed
-//		if (loaded == null) {
-//			return PAGE_STAY_AT_THE_SAME;
-//		}
-
-		addDefaultUserRoleForNewCustomer();
-
 		try {
 			if (uzytkownik.getIdUzytkownik() == null) {
 				// new record
@@ -96,8 +112,29 @@ public class RejestracjaBB {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu", null));
 			return PAGE_STAY_AT_THE_SAME;
 		}
+		
+		//add role after user is created
+		if (uzytkownik.getIdUzytkownik() != null) {
+			addDefaultUserRoleForNewCustomer(uzytkownik);
+		}
+		
 		context.addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Utwórz konto", "Sukces, podaj login i hasło"));
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Rejestracja udana, podaj login i hasło", null));
+		extcontext.getFlash().setKeepMessages(true);
 		return PAGE_LOGIN;
+	}
+
+	public Rola getRoleByNameFromDB(String roleName) {
+		Rola rola = null;
+		// 1. Prepare search params
+		String roleNameSearchParam = new String();
+
+		if (roleName != null && roleName.length() > 0) {
+			roleNameSearchParam = roleName;
+		}
+		// 2. Get list
+		rola = rolaDAO.getRoleByName(roleNameSearchParam);
+
+		return rola;
 	}
 }

@@ -1,6 +1,8 @@
 package jsf.project.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.*;
 
 /**
@@ -9,49 +11,50 @@ import javax.persistence.*;
  */
 @Embeddable
 public class UzytkownikRolaPK implements Serializable {
-	//default serial version id, required for serializable classes.
+	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(insertable=false, updatable=false)
 	private int idUzytkownik;
-
-	@Column(insertable=false, updatable=false)
 	private int idRola;
 
 	public UzytkownikRolaPK() {
 	}
+	
+	public UzytkownikRolaPK(int idUzytkownik, int idRola) {
+        this.idUzytkownik = idUzytkownik;
+        this.idRola = idRola;
+    }
+
 	public int getIdUzytkownik() {
-		return this.idUzytkownik;
+		return idUzytkownik;
 	}
+
 	public void setIdUzytkownik(int idUzytkownik) {
 		this.idUzytkownik = idUzytkownik;
 	}
+
 	public int getIdRola() {
-		return this.idRola;
+		return idRola;
 	}
+
 	public void setIdRola(int idRola) {
 		this.idRola = idRola;
 	}
 
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof UzytkownikRolaPK)) {
-			return false;
-		}
-		UzytkownikRolaPK castOther = (UzytkownikRolaPK)other;
-		return 
-			(this.idUzytkownik == castOther.idUzytkownik)
-			&& (this.idRola == castOther.idRola);
+	@Override
+	public int hashCode() {
+		return Objects.hash(idRola, idUzytkownik);
 	}
 
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idUzytkownik;
-		hash = hash * prime + this.idRola;
-		
-		return hash;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UzytkownikRolaPK other = (UzytkownikRolaPK) obj;
+		return idRola == other.idRola && idUzytkownik == other.idUzytkownik;
 	}
 }

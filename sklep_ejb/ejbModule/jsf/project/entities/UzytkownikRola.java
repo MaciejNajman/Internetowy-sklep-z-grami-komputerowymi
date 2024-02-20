@@ -25,7 +25,7 @@ public class UzytkownikRola implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private UzytkownikRolaPK id;
+	private UzytkownikRolaPK compositeKeyId;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="kiedy_nadano_role")
@@ -37,23 +37,23 @@ public class UzytkownikRola implements Serializable {
 
 	//bi-directional many-to-one association to Rola
 	@ManyToOne
-	@JoinColumn(name="idRola", insertable=false, updatable=false)
+	@JoinColumn(name="idRola", nullable = false, insertable=false, updatable=false)
 	private Rola rola;
 
 	//bi-directional many-to-one association to Uzytkownik
 	@ManyToOne
-	@JoinColumn(name="idUzytkownik", insertable=false, updatable=false)
+	@JoinColumn(name="idUzytkownik", nullable = false, insertable=false, updatable=false)
 	private Uzytkownik uzytkownik;
 
 	public UzytkownikRola() {
 	}
 
-	public UzytkownikRolaPK getId() {
-		return this.id;
+	public UzytkownikRolaPK getCompositeKey() {
+		return this.compositeKeyId;
 	}
 
-	public void setId(UzytkownikRolaPK id) {
-		this.id = id;
+	public void setCompositeKey(UzytkownikRolaPK id) {
+		this.compositeKeyId = id;
 	}
 
 	public Date getKiedyNadanoRole() {

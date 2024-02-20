@@ -15,6 +15,7 @@ public class UzytkownikDAO {
 
 	public void create(Uzytkownik uzytkownik) {
 		em.persist(uzytkownik);
+		em.flush();
 	}
 
 	public Uzytkownik merge(Uzytkownik uzytkownik) {
