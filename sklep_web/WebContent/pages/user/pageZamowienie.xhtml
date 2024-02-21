@@ -12,30 +12,77 @@
 		<f:viewAction action="#{zamowienieBB.onLoad()}" />
 	</f:metadata>
 
-<ui:define name="title">
-	#{txtMain.projectName}	
-</ui:define>
+	<ui:define name="title">
+		#{txtMain.projectName}	
+	</ui:define>
 
 	<ui:define name="content">
 
-		<p:messages />
-
 		<p:panel toggleable="true" header="#{txtMain.Ordering}">
 
-
-			<p:panelGrid columns="2" cellpadding="7">
-
-				<h:outputText value="#{txtMain.OrderDate}" />
-				<h:outputLabel for="z-data"
-					value="#{zamowienieBB.zamowienie.dataZlozeniaZamowienia}" />
-
-				<h:outputText value="#{txtMain.OrderReceived}" />
-				<h:outputLabel for="z-czy_przyjeto"
-					value="#{zamowienieBB.zamowienie.czyPrzyjetoZamowienie}" />
-
-			</p:panelGrid>
-
 			<h:form>
+				<p:growl id="msg" showDetail="true" life="5000" />
+				<h2>INFORMACJE ROZLICZENIOWE</h2>
+				<p:panelGrid columns="2" cellpadding="7">
+					<h:outputLabel for="ir-imie" value="#{txtMain.FirstName}" />
+					<p:inputText id="ir-imie" value="#{zamowienieBB.imie}"
+						required="true" requiredMessage="#{txtMain.FirstNameRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<h:outputLabel for="ir-nazwisko" value="#{txtMain.LastName}" />
+					<p:inputText id="ir-nazwisko" value="#{zamowienieBB.nazwisko}"
+						required="true" requiredMessage="#{txtMain.LastNameRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<h:outputLabel for="ir-miasto" value="#{txtMain.City}" />
+					<p:inputText id="ir-miasto" value="#{zamowienieBB.miasto}"
+						required="true" requiredMessage="#{txtMain.CityRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<h:outputLabel for="ir-adres_rozliczeniowy"
+						value="#{txtMain.BillingAddress}" />
+					<p:inputText id="ir-adres_rozliczeniowy"
+						value="#{zamowienieBB.adresRozliczeniowy}" required="true"
+						requiredMessage="#{txtMain.BillingAddressRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<h:outputLabel for="ir-kod_pocztowy" value="#{txtMain.ZipCode}" />
+					<p:inputMask id="ir-kod_pocztowy"
+						value="#{zamowienieBB.kodPocztowy}" required="true"
+						requiredMessage="#{txtMain.ZipCodeRequired}"
+						validatorMessage="#{txtMain.MaxSix}" mask="99-999">
+						<f:validateLength maximum="6" />
+					</p:inputMask>
+
+					<h:outputLabel for="ir-kraj" value="#{txtMain.Country}" />
+					<p:inputText id="ir-kraj" value="#{zamowienieBB.kraj}"
+						required="true" requiredMessage="#{txtMain.CountryRequired}"
+						validatorMessage="#{txtMain.MaxForty}">
+						<f:validateLength maximum="40" />
+					</p:inputText>
+
+					<h:outputLabel for="z-data" value="#{txtMain.OrderDate}" />
+					<h:outputText id="z-data"
+						value="#{zamowienieBB.zamowienie.dataZlozeniaZamowienia}" />
+
+					<p:outputLabel for="paymentMethod"
+						value="Wybierz sposób płatności:" />
+					<p:selectOneMenu id="paymentMethod" value="#{zamowienieBB.console}"
+						style="width:125px">
+						<f:selectItem itemLabel="Przelewy24" itemValue="" />
+						<f:selectItem itemLabel="PayPal" itemValue="" />
+						<f:selectItem itemLabel="paysafecard" itemValue="" />
+						<f:selectItem itemLabel="Visa" itemValue="" />
+					</p:selectOneMenu>
+				</p:panelGrid>
 
 				<p:separator style="height:10px;visibility: hidden" />
 
@@ -43,7 +90,6 @@
 					action="#{zamowienieBB.saveOrder()}" style="margin-right: 1em;" />
 
 				<p:button value="#{txtMain.Cancel}" outcome="pageMain" />
-
 			</h:form>
 
 		</p:panel>

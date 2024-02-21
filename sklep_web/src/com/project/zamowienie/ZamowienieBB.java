@@ -33,6 +33,14 @@ public class ZamowienieBB implements Serializable {
 	private Gra gra = new Gra();
 	private Zamowienie loaded = null;
 	private Gra loaded1 = null;
+	//placeholder values until payment gateway is implemented
+	private String console;
+	private String imie;
+	private String nazwisko;
+	private String miasto;
+	private String adresRozliczeniowy;
+	private String kodPocztowy;
+	private String kraj;
 
 	@EJB
 	ZamowienieDAO zamowienieDAO;
@@ -54,6 +62,62 @@ public class ZamowienieBB implements Serializable {
 
 	public GraHasZamowienie getGraHasZamowienia() {
 		return graZam;
+	}
+	
+	public String getConsole() {
+		return console;
+	}
+
+	public void setConsole(String console) {
+		this.console = console;
+	}
+
+	public String getImie() {
+		return imie;
+	}
+
+	public void setImie(String imie) {
+		this.imie = imie;
+	}
+
+	public String getNazwisko() {
+		return nazwisko;
+	}
+
+	public void setNazwisko(String nazwisko) {
+		this.nazwisko = nazwisko;
+	}
+
+	public String getMiasto() {
+		return miasto;
+	}
+
+	public void setMiasto(String miasto) {
+		this.miasto = miasto;
+	}
+
+	public String getAdresRozliczeniowy() {
+		return adresRozliczeniowy;
+	}
+
+	public void setAdresRozliczeniowy(String adresRozliczeniowy) {
+		this.adresRozliczeniowy = adresRozliczeniowy;
+	}
+
+	public String getKodPocztowy() {
+		return kodPocztowy;
+	}
+
+	public void setKodPocztowy(String kodPocztowy) {
+		this.kodPocztowy = kodPocztowy;
+	}
+
+	public String getKraj() {
+		return kraj;
+	}
+
+	public void setKraj(String kraj) {
+		this.kraj = kraj;
 	}
 
 	public void onLoad() throws IOException {

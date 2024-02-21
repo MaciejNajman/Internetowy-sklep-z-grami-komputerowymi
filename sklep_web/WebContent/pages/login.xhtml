@@ -8,6 +8,10 @@
 
 <ui:composition template="/templates/login-template.xhtml">
 
+	<ui:define name="title">
+		#{txtMain.LoginTitle}
+	</ui:define>
+	
 	<ui:define name="content">
 		<div class="loginHeader">
 			<h1 id="loginHeaderH1">#{txtMain.WelcomeText}</h1>

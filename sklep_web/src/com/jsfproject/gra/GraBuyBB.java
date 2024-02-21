@@ -78,15 +78,15 @@ public class GraBuyBB implements Serializable {
 		//Tworzenie nowego zamowienia
 		Zamowienie z = new Zamowienie();
 		LocalDateTime localDateTime = LocalDateTime.now();
-		LocalDateTime localDateTimePlusOneDay = localDateTime.plusDays(1);
+		LocalDateTime localDateTimePlus3Days = localDateTime.plusDays(3);
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedDateTime = localDateTime.format(myFormatObj);
-		String formattedLocalDateTimePlusOneDay = localDateTimePlusOneDay.format(myFormatObj);
+		String formattedLocalDateTimePlus3Days = localDateTimePlus3Days.format(myFormatObj);
 		z.setDataZlozeniaZamowienia(formattedDateTime);
 		z.setCzyPrzyjetoZamowienie((byte)1);
-		z.setZaplacono(100);
-		z.setCzyZamowienieZrealizowano((byte)1);
-		z.setDataRealizacjiZamowienia(formattedLocalDateTimePlusOneDay);
+		z.setZaplacono(0);
+		z.setCzyZamowienieZrealizowano((byte)0);
+		z.setDataRealizacjiZamowienia(formattedLocalDateTimePlus3Days);
 		z.setUzytkownik(u);
 		
 		//Dodawanie gry do zamowienia

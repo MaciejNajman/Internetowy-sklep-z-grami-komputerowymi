@@ -13,12 +13,13 @@
 	</f:metadata>
 
 <ui:define name="title">
-	#{txtMain.projectName}	
+	#{txtMain.EmployeePage}	
 </ui:define>
 
 	<ui:define name="content">
 
 		<p:panel toggleable="true" header="#{txtMain.EditRec}">
+		<p:growl id="msgs" showDetail="true" life="5000" />
 
 			<h:form rendered="#{graEditBB.gra != null}">
 				<p:panelGrid columns="2" cellpadding="7">
@@ -62,7 +63,6 @@
 
 				</p:panelGrid>
 				<p:separator style="height:10px;visibility: hidden" />
-				<p:messages id="msgs" />
 
 				<p:commandButton value="#{txtMain.Save}" action="#{graEditBB.saveData()}"
 					style="margin-right: 1em;" update="@form" />

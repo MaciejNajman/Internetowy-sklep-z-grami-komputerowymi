@@ -12,40 +12,42 @@
 		<f:viewAction action="#{graBuyBB.onLoad()}" />
 	</f:metadata>
 
-<ui:define name="title">
-	#{txtMain.projectName}	
-</ui:define>
+	<ui:define name="title">
+		#{txtMain.projectName}	
+	</ui:define>
 
 	<ui:define name="content">
 
 		<p:panel toggleable="true" header="#{txtMain.BuyingGame}">
+			<p:growl id="msgs" showDetail="true" life="5000" />
 
-			
-				<p:panelGrid columns="2" cellpadding="7">
+			<p:panelGrid columns="2" cellpadding="7">
 
-					<h:outputText value="#{txtMain.GameName}" />
-					<h:outputLabel for="g-nazwa_gry" value="#{graBuyBB.gra.nazwaGry}" />
+				<h:outputText value="#{txtMain.GameName}" />
+				<h:outputLabel for="g-nazwa_gry" value="#{graBuyBB.gra.nazwaGry}" />
 
-					<h:outputText value="#{txtMain.Price}" />
-					<h:outputLabel for="g-cena_gry" value="#{graBuyBB.gra.cena}" />
-					
-					<h:outputText value="#{txtMain.Genre}" />
-					<h:outputLabel for="g-gatunek" value="#{graBuyBB.gra.gatunek}" />
+				<h:outputText value="#{txtMain.Price}" />
+				<h:outputLabel for="g-cena_gry" value="#{graBuyBB.gra.cena}" />
 
-					<h:outputText value="#{txtMain.AgeRes}" />
-					<h:outputLabel for="g-klasyfikacja_wiekowa" value="#{graBuyBB.gra.klasyfikacjaWiekowa}" />
-					
-					<h:outputText value="#{txtMain.Dev}" />
-					<h:outputLabel for="g-producent_gry" value="#{graBuyBB.gra.producentGry}" />
-					
-				</p:panelGrid>
-				<p:separator style="height:10px;visibility: hidden"/>
+				<h:outputText value="#{txtMain.Genre}" />
+				<h:outputLabel for="g-gatunek" value="#{graBuyBB.gra.gatunek}" />
+
+				<h:outputText value="#{txtMain.AgeRes}" />
+				<h:outputLabel for="g-klasyfikacja_wiekowa"
+					value="#{graBuyBB.gra.klasyfikacjaWiekowa}" />
+
+				<h:outputText value="#{txtMain.Dev}" />
+				<h:outputLabel for="g-producent_gry"
+					value="#{graBuyBB.gra.producentGry}" />
+
+			</p:panelGrid>
+			<p:separator style="height:10px;visibility: hidden" />
+			<h:form>
 				<p:commandButton value="#{txtMain.Confirm}"
-					action="#{graBuyBB.noweZamowienie()}" style="margin-right: 1em;"/>
+					action="#{graBuyBB.noweZamowienie()}" style="margin-right: 1em;" />
 
 				<p:button value="#{txtMain.Cancel}" outcome="pageMain" />
-
-			
+			</h:form>
 		</p:panel>
 
 	</ui:define>
