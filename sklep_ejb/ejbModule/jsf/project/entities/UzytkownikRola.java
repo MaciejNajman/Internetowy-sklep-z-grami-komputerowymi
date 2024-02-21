@@ -3,9 +3,11 @@ package jsf.project.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -13,14 +15,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * The persistent class for the uzytkownik_rola database table.
  * 
  */
 @Entity
-@Table(name="uzytkownik_rola")
-@NamedQuery(name="UzytkownikRola.findAll", query="SELECT u FROM UzytkownikRola u")
+@Table(name = "uzytkownik_rola")
+@NamedQuery(name = "UzytkownikRola.findAll", query = "SELECT u FROM UzytkownikRola u")
 public class UzytkownikRola implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,21 +29,21 @@ public class UzytkownikRola implements Serializable {
 	private UzytkownikRolaPK compositeKeyId;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="kiedy_nadano_role")
+	@Column(name = "kiedy_nadano_role")
 	private Date kiedyNadanoRole;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="kiedy_odebrano_role")
+	@Column(name = "kiedy_odebrano_role")
 	private Date kiedyOdebranoRole;
 
-	//bi-directional many-to-one association to Rola
+	// bi-directional many-to-one association to Rola
 	@ManyToOne
-	@JoinColumn(name="idRola", nullable = false, insertable=false, updatable=false)
+	@JoinColumn(name = "idRola", nullable = false, insertable = false, updatable = false)
 	private Rola rola;
 
-	//bi-directional many-to-one association to Uzytkownik
-	@ManyToOne
-	@JoinColumn(name="idUzytkownik", nullable = false, insertable=false, updatable=false)
+	// bi-directional many-to-one association to Uzytkownik
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idUzytkownik", referencedColumnName = "idUzytkownik", nullable = false, insertable = false, updatable = false)
 	private Uzytkownik uzytkownik;
 
 	public UzytkownikRola() {

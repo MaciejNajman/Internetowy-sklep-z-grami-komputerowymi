@@ -55,53 +55,12 @@ public class RejestracjaBB {
 		return uzytkownik;
 	}
 
-//	public void onLoad() throws IOException {
-//		// 1. load uzytkownik passed through session
-//		// HttpSession session = (HttpSession)
-//		// context.getExternalContext().getSession(true);
-//		// loaded = (Uzytkownik) session.getAttribute("uzytkownik");
-//
-//		// 2. load uzytkownik passed through flash
-//		loaded = (Uzytkownik) flash.get("uzytkownik");
-//
-//		//cleaning: attribute received => delete it from session
-//		if (loaded != null) {
-//			uzytkownik = loaded;
-//		} else {
-//			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędne użycie systemu", null));
-//		}
-//	}
-
-	public void addDefaultUserRoleForNewCustomer(Uzytkownik uzytkownik) {
-		Rola r = getRoleByNameFromDB("user");
-
-		UzytkownikRolaPK key = new UzytkownikRolaPK(uzytkownik.getIdUzytkownik(), r.getIdRola());
-		UzytkownikRola entity = new UzytkownikRola();
-		entity.setCompositeKey(key);
-		
-		Date now = new Date();
-		entity.setKiedyNadanoRole(now);
-
-		try {
-			if (entity.getCompositeKey() != null) {
-				// new record
-				uzytkownikRolaDAO.create(entity);
-			} else {
-				// existing record
-				uzytkownikRolaDAO.merge(entity);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu roli", null));
-		}
-	}
-
 	public String saveRegisteredUser() {
 		try {
 			if (uzytkownik.getIdUzytkownik() == null) {
 				// new record
-				uzytkownikDAO.create(uzytkownik);
+				int idOfCreatedUser = uzytkownikDAO.create(uzytkownik);
+				addDefaultUserRoleForNewCustomer(idOfCreatedUser);//wrong user id
 			} else {
 				// existing record
 				uzytkownikDAO.merge(uzytkownik);
@@ -111,11 +70,6 @@ public class RejestracjaBB {
 			context.addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu", null));
 			return PAGE_STAY_AT_THE_SAME;
-		}
-		
-		//add role after user is created
-		if (uzytkownik.getIdUzytkownik() != null) {
-			addDefaultUserRoleForNewCustomer(uzytkownik);
 		}
 		
 		context.addMessage(null,
@@ -136,5 +90,29 @@ public class RejestracjaBB {
 		rola = rolaDAO.getRoleByName(roleNameSearchParam);
 
 		return rola;
+	}
+	
+	public void addDefaultUserRoleForNewCustomer(int userId) {
+		Rola r = getRoleByNameFromDB("user");
+		UzytkownikRolaPK key = new UzytkownikRolaPK(userId, r.getIdRola());
+		UzytkownikRola entity = new UzytkownikRola();
+		entity.setCompositeKey(key);
+		
+		Date now = new Date();
+		entity.setKiedyNadanoRole(now);
+
+		try {
+			if (entity.getCompositeKey() != null) {
+				// new record
+				uzytkownikRolaDAO.create(entity);
+			} else {
+				// existing record
+				uzytkownikRolaDAO.merge(entity);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu roli", null));
+		}
 	}
 }

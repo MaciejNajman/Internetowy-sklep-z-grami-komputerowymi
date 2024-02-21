@@ -13,9 +13,10 @@ public class UzytkownikDAO {
 	@PersistenceContext
 	EntityManager em;
 
-	public void create(Uzytkownik uzytkownik) {
+	public int create(Uzytkownik uzytkownik) {
 		em.persist(uzytkownik);
 		em.flush();
+		return uzytkownik.getIdUzytkownik();
 	}
 
 	public Uzytkownik merge(Uzytkownik uzytkownik) {
@@ -41,8 +42,8 @@ public class UzytkownikDAO {
 
 		try {
 			u = (Uzytkownik) query.getSingleResult();
-			if(u != null) {
-				u.getUzytkownikRolas().size(); //lepsze pobranie rol
+			if (u != null) {
+				u.getUzytkownikRolas().size(); // lepsze pobranie rol
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
