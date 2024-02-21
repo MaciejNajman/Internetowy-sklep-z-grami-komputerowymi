@@ -13,7 +13,7 @@
 </ui:define>
 
 <ui:define name="content">
-
+	<p:growl id="msg" showDetail="false" life="5000" />
 	<p:panel header="#{txtMain.SearchOptions}" toggleable="true"
 		style="margin-bottom: 1em;">
 		<h:form>
@@ -24,8 +24,6 @@
 			</h:panelGrid>
 		</h:form>
 	</p:panel>
-
-	<p:messages />
 	
 	<p:panel header="#{txtMain.Choose}" toggleable="true" style="margin-bottom: 1em;">
 	<h:form id="form-table" style="margin-bottom:1em;">

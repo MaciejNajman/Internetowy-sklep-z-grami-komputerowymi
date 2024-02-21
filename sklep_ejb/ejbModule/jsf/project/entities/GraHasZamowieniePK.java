@@ -1,6 +1,8 @@
 package jsf.project.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.*;
 
 /**
@@ -9,49 +11,50 @@ import javax.persistence.*;
  */
 @Embeddable
 public class GraHasZamowieniePK implements Serializable {
-	//default serial version id, required for serializable classes.
+	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(insertable=false, updatable=false)
 	private int idGra;
-
-	@Column(insertable=false, updatable=false)
 	private int idZamowienie;
 
 	public GraHasZamowieniePK() {
 	}
-	public int getIdGra() {
-		return this.idGra;
+
+	public GraHasZamowieniePK(int idGra, int idZamowienie) {
+		this.idZamowienie = idZamowienie;
+		this.idGra = idGra;
 	}
+
+	public int getIdGra() {
+		return idGra;
+	}
+
 	public void setIdGra(int idGra) {
 		this.idGra = idGra;
 	}
+
 	public int getIdZamowienie() {
-		return this.idZamowienie;
+		return idZamowienie;
 	}
+
 	public void setIdZamowienie(int idZamowienie) {
 		this.idZamowienie = idZamowienie;
 	}
 
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof GraHasZamowieniePK)) {
-			return false;
-		}
-		GraHasZamowieniePK castOther = (GraHasZamowieniePK)other;
-		return 
-			(this.idGra == castOther.idGra)
-			&& (this.idZamowienie == castOther.idZamowienie);
+	@Override
+	public int hashCode() {
+		return Objects.hash(idGra, idZamowienie);
 	}
 
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idGra;
-		hash = hash * prime + this.idZamowienie;
-		
-		return hash;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GraHasZamowieniePK other = (GraHasZamowieniePK) obj;
+		return idGra == other.idGra && idZamowienie == other.idZamowienie;
 	}
 }

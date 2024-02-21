@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import jsf.project.dao.GraDAO;
 import jsf.project.entities.Gra;
+import jsf.project.entities.GraHasZamowienie;
+import jsf.project.entities.GraHasZamowieniePK;
 import jsf.project.entities.Uzytkownik;
 import jsf.project.entities.Zamowienie;
 
@@ -27,7 +29,6 @@ public class GraBuyBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String PAGE_ORDER = "pageZamowienie?faces-redirect=true";
-	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private Gra gra = new Gra();
 	private Gra loaded = null;
@@ -89,13 +90,16 @@ public class GraBuyBB implements Serializable {
 		z.setUzytkownik(u);
 		
 		//Dodawanie gry do zamowienia
-		//GraHasZamowienie graHasZamowienia = new GraHasZamowienie();
-		//graHasZamowienia.setGra((Gra)flash.get("gra"));
-		//graHasZamowienia.setZamowienie(z);
+//		Integer idGra = gra.getIdGra();
+//		Integer idZamowienie = 0;
+//		GraHasZamowieniePK key = new GraHasZamowieniePK(idGra, idZamowienie);
+//		GraHasZamowienie graHasZamowienia = new GraHasZamowienie();
+//		graHasZamowienia.setId(key);
+//		graHasZamowienia.setIloscSztuk(1);
 		
 		//Pass object through flash	
 		flash.put("zamowienie", z);
-		//flash.put("graHasZamowienie", graHasZamowienia);
+		flash.put("gra", gra);
 		
 		return PAGE_ORDER;
 	}

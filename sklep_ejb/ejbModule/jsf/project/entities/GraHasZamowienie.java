@@ -22,12 +22,12 @@ public class GraHasZamowienie implements Serializable {
 
 	//bi-directional many-to-one association to Gra
 	@ManyToOne
-	@JoinColumn(name="idGra", insertable=false, updatable=false)
+	@JoinColumn(name="idGra", nullable = false, insertable=false, updatable=false)
 	private Gra gra;
 
 	//bi-directional many-to-one association to Zamowienie
 	@ManyToOne
-	@JoinColumn(name="idZamowienie", insertable=false, updatable=false)
+	@JoinColumn(name="idZamowienie", nullable = false, insertable=false, updatable=false)
 	private Zamowienie zamowienie;
 
 	public GraHasZamowienie() {
