@@ -134,12 +134,12 @@ public class ZamowienieBB implements Serializable {
 		graHasZamowienia.setIloscSztuk(1);
 
 		try {
-			if (graZam.getId() != null) {
+			if (graHasZamowienia.getId() != null) {
 				// new record
-				graHasZamowienieDAO.create(graZam);
+				graHasZamowienieDAO.create(graHasZamowienia);
 			} else {
 				// existing record
-				graHasZamowienieDAO.merge(graZam);
+				graHasZamowienieDAO.merge(graHasZamowienia);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
