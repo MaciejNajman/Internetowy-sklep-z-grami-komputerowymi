@@ -59,8 +59,7 @@ public class RejestracjaBB {
 		try {
 			if (uzytkownik.getIdUzytkownik() == null) {
 				// new record
-				int idOfCreatedUser = uzytkownikDAO.create(uzytkownik);
-				addDefaultUserRoleForNewCustomer(idOfCreatedUser);//wrong user id
+				uzytkownikDAO.create(uzytkownik);
 			} else {
 				// existing record
 				uzytkownikDAO.merge(uzytkownik);
@@ -71,10 +70,13 @@ public class RejestracjaBB {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas zapisu", null));
 			return PAGE_STAY_AT_THE_SAME;
 		}
+
+		addDefaultUserRoleForNewCustomer(uzytkownikDAO.getIdOfNewlyCreatedUserFromDatabase());
 		
 		context.addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Rejestracja udana, podaj login i hasło", null));
 		extcontext.getFlash().setKeepMessages(true);
+		
 		return PAGE_LOGIN;
 	}
 
@@ -91,13 +93,13 @@ public class RejestracjaBB {
 
 		return rola;
 	}
-	
+
 	public void addDefaultUserRoleForNewCustomer(int userId) {
 		Rola r = getRoleByNameFromDB("user");
 		UzytkownikRolaPK key = new UzytkownikRolaPK(userId, r.getIdRola());
 		UzytkownikRola entity = new UzytkownikRola();
 		entity.setCompositeKey(key);
-		
+
 		Date now = new Date();
 		entity.setKiedyNadanoRole(now);
 

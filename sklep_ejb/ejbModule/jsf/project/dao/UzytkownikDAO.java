@@ -1,10 +1,13 @@
 package jsf.project.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import jsf.project.entities.Gra;
 import jsf.project.entities.Uzytkownik;
 
 @Stateless
@@ -13,10 +16,9 @@ public class UzytkownikDAO {
 	@PersistenceContext
 	EntityManager em;
 
-	public int create(Uzytkownik uzytkownik) {
+	public void create(Uzytkownik uzytkownik) {
 		em.persist(uzytkownik);
 		em.flush();
-		return uzytkownik.getIdUzytkownik();
 	}
 
 	public Uzytkownik merge(Uzytkownik uzytkownik) {
@@ -77,4 +79,19 @@ public class UzytkownikDAO {
 //		if (rola.getIdRola()==3) {
 //			roles.add("employee");
 //		}
+	
+	public int getIdOfNewlyCreatedUserFromDatabase() {
+		int userId = 0;
+		int limit = 1;
+
+		Query query = em.createQuery("SELECT idUzytkownik FROM Uzytkownik ORDER BY idUzytkownik DESC").setMaxResults(limit);
+
+		try {
+			userId = (int) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return userId;
+	}
 }
