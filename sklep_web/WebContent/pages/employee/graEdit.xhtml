@@ -19,9 +19,9 @@
 	<ui:define name="content">
 
 		<p:panel toggleable="true" header="#{txtMain.EditRec}">
-		<p:growl id="msgs" showDetail="true" life="5000" />
 
 			<h:form rendered="#{graEditBB.gra != null}">
+			<p:growl id="msgs" showDetail="true" life="5000" />
 				<p:panelGrid columns="2" cellpadding="7">
 
 					<h:outputLabel for="g-nazwa_gry" value="#{txtMain.GameName}" />

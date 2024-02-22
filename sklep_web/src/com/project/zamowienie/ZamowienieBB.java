@@ -2,6 +2,7 @@ package com.project.zamowienie;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 
@@ -9,9 +10,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.simplesecurity.RemoteClient;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import jsf.project.dao.ZamowienieDAO;
 import jsf.project.dao.GraHasZamowienieDAO;
@@ -19,6 +22,7 @@ import jsf.project.entities.Zamowienie;
 import jsf.project.entities.Gra;
 import jsf.project.entities.GraHasZamowienie;
 import jsf.project.entities.GraHasZamowieniePK;
+import jsf.project.entities.Uzytkownik;
 
 @Named
 @ViewScoped
@@ -26,6 +30,7 @@ public class ZamowienieBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String PAGE_MAIN = "pageMain?faces-redirect=true";
+	private static final String PAGE_USER_ORDERS = "pageUserOrders?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private Zamowienie zamowienie = new Zamowienie();
@@ -210,5 +215,24 @@ public class ZamowienieBB implements Serializable {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Wystąpił błąd podczas zapisu gry do zamówienia", null));
 		}
+	}
+	
+	public String showUserOrders(){
+		getFullOrderListForUser();
+		return PAGE_USER_ORDERS;
+	}
+	
+	public List<Zamowienie> getFullOrderListForUser(){
+		List<Zamowienie> list = null;
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		
+		//pobranie obiektu uzytkownika, ktorego zamowienia pobieram
+		HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
+		RemoteClient<Uzytkownik> c = RemoteClient.load(req.getSession());
+		Uzytkownik u = c.getDetails();
+		Integer userId = u.getIdUzytkownik();
+		list = zamowienieDAO.getFullOrderListForUser(userId);
+		
+		return list;
 	}
 }

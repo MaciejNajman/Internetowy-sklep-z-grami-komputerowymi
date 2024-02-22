@@ -1,5 +1,7 @@
 package jsf.project.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,5 +47,20 @@ public class ZamowienieDAO {
 		}
 
 		return userId;
+	}
+	
+	public List<Zamowienie> getFullOrderListForUser(Integer userId) {
+		List<Zamowienie> list = null;
+		Integer user_id = userId;
+
+		Query query = em.createQuery("SELECT g.nazwa_gry, g.cena, g.gatunek, g.klasyfikacja_wiekowa, g.producent_gry, gz.ilosc_sztuk, z.data_zlozenia_zamowienia, z.data_realizacji_zamowienia FROM `gra` g JOIN gra_has_zamowienie gz ON g.idGra=gz.idGra JOIN zamowienie z ON gz.idZamowienie=z.idZamowienie JOIN uzytkownik u ON z.Uzytkownik_idUzytkownik=u.idUzytkownik WHERE u.idUzytkownik like :user_id");
+
+		try {
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 }

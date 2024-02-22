@@ -6,14 +6,22 @@
 
 	<p:panel header="#{txtMain.TitleMenu}" toggleable="true"
 		styleClass="bottom-space">
+		<h:form>
+			<p:tabMenu activeIndex="#{param.i}">
+				<p:menuitem value="#{txtMain.mainPage}" outcome="pageMain"
+					icon="pi pi-home">
+				</p:menuitem>
+				<p:menuitem value="#{txtMain.MyOrders}" action="#{userOrdersBB.showUserOrders()}"
+					icon="pi pi-shopping-cart">
+				</p:menuitem>
+				<p:menuitem value="#{txtMain.LogOut}" action="#{loginBB.doLogout()}"
+					icon="pi pi-sign-out">
+				</p:menuitem>
+			</p:tabMenu>
+		</h:form>
 		<h:panelGrid columns="3" cellpadding="10">
-			<h:outputText value="Zalogowano: #{remoteClient.details.imie} #{remoteClient.details.nazwisko}" />
-			<h:form>
-				<p:commandButton id="logout" value="#{txtMain.LogOut}"
-					action="#{loginBB.doLogout()}"
-					styleClass="rounded-button ui-button-secondary"
-					icon="pi pi-sign-out" />
-			</h:form>
+			<h:outputText
+				value="#{txtMain.LoggedAs} #{remoteClient.details.imie} #{remoteClient.details.nazwisko}" />
 		</h:panelGrid>
 	</p:panel>
 </ui:composition>

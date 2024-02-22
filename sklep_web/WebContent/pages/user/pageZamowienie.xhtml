@@ -22,7 +22,7 @@
 
 			<h:form>
 				<p:growl id="msg" showDetail="true" life="5000" />
-				<h2>INFORMACJE ROZLICZENIOWE</h2>
+				<h2>#{txtMain.BillingInfo}</h2>
 				<p:panelGrid columns="2" cellpadding="7">
 					<h:outputLabel for="ir-imie" value="#{txtMain.FirstName}" />
 					<p:inputText id="ir-imie" value="#{zamowienieBB.imie}"
@@ -69,25 +69,25 @@
 						<f:validateLength maximum="40" />
 					</p:inputText>
 
-					<h:outputLabel for="z-data" value="#{txtMain.OrderDate}" />
-					<h:outputText id="z-data"
+					<h:outputLabel value="#{txtMain.OrderDate}" />
+					<h:outputText
 						value="#{zamowienieBB.zamowienie.dataZlozeniaZamowienia}" />
 
 					<p:outputLabel for="paymentMethod"
-						value="Wybierz sposób płatności:" />
+						value="#{txtMain.ChoosePaymentMethod}" />
 					<p:selectOneMenu id="paymentMethod" value="#{zamowienieBB.console}"
 						style="width:125px">
-						<f:selectItem itemLabel="Przelewy24" itemValue="" />
-						<f:selectItem itemLabel="PayPal" itemValue="" />
-						<f:selectItem itemLabel="paysafecard" itemValue="" />
-						<f:selectItem itemLabel="Visa" itemValue="" />
+						<f:selectItem itemLabel="Przelewy24" itemValue="Przelewy24" />
+						<f:selectItem itemLabel="PayPal" itemValue="PayPal" />
+						<f:selectItem itemLabel="paysafecard" itemValue="paysafecard" />
+						<f:selectItem itemLabel="Visa" itemValue="Visa" />
 					</p:selectOneMenu>
 				</p:panelGrid>
 
 				<p:separator style="height:10px;visibility: hidden" />
 
 				<p:commandButton value="#{txtMain.OrderConfirm}"
-					action="#{zamowienieBB.saveOrder()}" style="margin-right: 1em;" />
+					action="#{zamowienieBB.saveOrder()}" update="@form" style="margin-right: 1em;" />
 
 				<p:button value="#{txtMain.Cancel}" outcome="pageMain" />
 			</h:form>
