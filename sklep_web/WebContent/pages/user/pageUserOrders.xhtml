@@ -18,24 +18,24 @@
 		<p:panel header="#{txtMain.MyOrders}" toggleable="true"
 			style="margin-bottom: 1em;">
 			<h:form id="form-orders" style="margin-bottom:1em;">
-				<p:dataView var="orders" value="#{zamowienieBB.list}" rows="6"
+				<p:dataView var="orders" value="#{zamowienieBB.ordersList}" rows="6"
 					paginator="true" rowsPerPageTemplate="6,12,16"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
 					<p:dataViewGridItem>
-						<p:panel header="IdZamowienia" style="text-align:center">
+						<p:panel header="Zamówienie" style="text-align:center">
 							<h:panelGrid columns="1" style="width:100%">
-								<p:graphicImage name="demo/images/car/#{car.brand}.gif" />
 
-								<h:outputText value="#{car.brand}" />
+								<h:outputText value="#{zamowienie.nazwaGry}" />
+								<h:outputText value="#{zamowienie.cena}" />
 
-								<p:commandLink update=":form:carDetail"
+								<p:commandLink update=":form-orders:orderDetail"
 									oncomplete="PF('carDialog').show()" title="View Detail">
 									<h:outputText styleClass="ui-icon pi pi-search"
 										style="margin:0 auto;" />
-									<f:setPropertyActionListener value="#{car}"
-										target="#{dataGridView.selectedCar}" />
+									<f:setPropertyActionListener value="#{zamowienie}"
+										target="#{zamowienieBB.ordersList}" />
 								</p:commandLink>
 							</h:panelGrid>
 						</p:panel>
@@ -44,7 +44,6 @@
 					<p:dataViewListItem>
 						<h:panelGrid columns="3" style="width:100%"
 							columnClasses="logo,detail">
-							<p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />
 
 							<p:outputPanel>
 								<h:panelGrid columns="2" cellpadding="5">
@@ -59,7 +58,7 @@
 								</h:panelGrid>
 							</p:outputPanel>
 
-							<p:commandLink update=":form:carDetail"
+							<p:commandLink update=":form-orders:orderDetail"
 								oncomplete="PF('carDialog').show()" title="View Detail">
 								<h:outputText styleClass="ui-icon pi pi-search"
 									style="margin:0 auto;" />
@@ -72,27 +71,31 @@
 
 				<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
 					showEffect="fade" hideEffect="fade" resizable="false">
-					<p:outputPanel id="carDetail" style="text-align:center;">
+					<p:outputPanel id="orderDetail" style="text-align:center;">
 						<p:panelGrid columns="2"
-							rendered="#{not empty dataGridView.selectedCar}"
+							rendered="#{not empty zamowienieBB.ordersList}"
 							columnClasses="label,value">
-							<f:facet name="header">
-								<p:graphicImage
-									name="demo/images/car/#{dataGridView.selectedCar.brand}-big.gif" />
-							</f:facet>
 
-							<h:outputText value="Id:" />
-							<h:outputText value="#{dataGridView.selectedCar.id}" />
+							<h:outputText value="Nazwa:" />
+							<h:outputText value="#{zamowienieBB.ordersList.nazwaGry}" />
 
-							<h:outputText value="Year" />
-							<h:outputText value="#{dataGridView.selectedCar.year}" />
+							<h:outputText value="Cena:" />
+							<h:outputText value="#{zamowienieBB.ordersList.cena}" />
 
-							<h:outputText value="Color:" />
-							<h:outputText value="#{dataGridView.selectedCar.color}"
-								style="color:#{dataGridView.selectedCar.color}" />
+							<h:outputText value="Gatunek:" />
+							<h:outputText value="#{zamowienieBB.ordersList.gatunek}" />
 
 							<h:outputText value="Price" />
-							<h:outputText value="$#{dataGridView.selectedCar.price}" />
+							<h:outputText value="#{zamowienieBB.ordersList.klasyfikacjaWiekowa}" />
+							
+							<h:outputText value="Price" />
+							<h:outputText value="#{zamowienieBB.ordersList.producentGry}" />
+							
+							<h:outputText value="Price" />
+							<h:outputText value="#{zamowienieBB.ordersList.dataZlozeniaZamowienia}" />
+							
+							<h:outputText value="Price" />
+							<h:outputText value="#{zamowienieBB.ordersList.dataRealizacjiZamowienia}" />
 						</p:panelGrid>
 					</p:outputPanel>
 				</p:dialog>

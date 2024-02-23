@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import jsf.project.dao.ZamowienieDAO;
+import jsf.project.dao.GraDAO;
 import jsf.project.dao.GraHasZamowienieDAO;
 import jsf.project.entities.Zamowienie;
 import jsf.project.entities.Gra;
@@ -38,6 +39,8 @@ public class ZamowienieBB implements Serializable {
 	private Gra gra = new Gra();
 	private Zamowienie loaded = null;
 	private Gra loaded1 = null;
+	private List<Zamowienie> ordersList;
+
 	//placeholder values until payment gateway is implemented
 	private String console;
 	private String imie;
@@ -51,6 +54,8 @@ public class ZamowienieBB implements Serializable {
 	ZamowienieDAO zamowienieDAO;
 	@EJB
 	GraHasZamowienieDAO graHasZamowienieDAO;
+	@EJB
+	GraDAO graDAO;
 
 	@Inject
 	FacesContext context;
@@ -60,6 +65,10 @@ public class ZamowienieBB implements Serializable {
 
 	@Inject
 	Flash flash;
+
+	public void setOrdersList(List<Zamowienie> ordersList) {
+		this.ordersList = ordersList;
+	}
 
 	public Zamowienie getZamowienie() {
 		return zamowienie;
@@ -218,11 +227,11 @@ public class ZamowienieBB implements Serializable {
 	}
 	
 	public String showUserOrders(){
-		getFullOrderListForUser();
+		getOrdersList();
 		return PAGE_USER_ORDERS;
 	}
 	
-	public List<Zamowienie> getFullOrderListForUser(){
+	public List<Zamowienie> getOrdersList(){
 		List<Zamowienie> list = null;
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		

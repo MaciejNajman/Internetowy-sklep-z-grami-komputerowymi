@@ -51,9 +51,28 @@ public class ZamowienieDAO {
 	
 	public List<Zamowienie> getFullOrderListForUser(Integer userId) {
 		List<Zamowienie> list = null;
+		
+		String select = "SELECT g.nazwaGry, g.cena, g.gatunek, g.klasyfikacjaWiekowa, g.producentGry, z.dataZlozeniaZamowienia, z.dataRealizacjiZamowienia ";
+		String from = "FROM Gra g JOIN GraHasZamowienie gz ON g.idGra=gz.gra JOIN Zamowienie z ON gz.zamowienie=z.idZamowienie JOIN Uzytkownik u ON z.uzytkownik=u.idUzytkownik ";
+		String where = "";
+		String orderby = "ORDER BY z.dataZlozeniaZamowienia DESC";
 		Integer user_id = userId;
+		
+		if (user_id != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += "and ";
+			}
+			where += "u.idUzytkownik like :user_id ";
+		}
 
-		Query query = em.createQuery("SELECT g.nazwa_gry, g.cena, g.gatunek, g.klasyfikacja_wiekowa, g.producent_gry, gz.ilosc_sztuk, z.data_zlozenia_zamowienia, z.data_realizacji_zamowienia FROM `gra` g JOIN gra_has_zamowienie gz ON g.idGra=gz.idGra JOIN zamowienie z ON gz.idZamowienie=z.idZamowienie JOIN uzytkownik u ON z.Uzytkownik_idUzytkownik=u.idUzytkownik WHERE u.idUzytkownik like :user_id");
+		//Query query = em.createQuery("SELECT g.nazwaGry, g.cena, g.gatunek, g.klasyfikacjaWiekowa, g.producentGry, gz.iloscSztuk, z.dataZlozeniaZamowienia, z.dataRealizacjiZamowienia FROM Gra g JOIN GraHasZamowienie gz ON g.idGra=gz.gra JOIN Zamowienie z ON gz.zamowienie=z.idZamowienie JOIN Uzytkownik u ON z.uzytkownik=u.idUzytkownik WHERE u.idUzytkownik like :user_id");
+		Query query = em.createQuery(select + from + where + orderby);
+		
+		if (user_id != null) {
+			query.setParameter("user_id", user_id);
+		}
 
 		try {
 			list = query.getResultList();

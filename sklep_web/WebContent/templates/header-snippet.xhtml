@@ -8,10 +8,10 @@
 		styleClass="bottom-space">
 		<h:form>
 			<p:tabMenu activeIndex="#{param.i}">
-				<p:menuitem value="#{txtMain.mainPage}" outcome="pageMain"
+				<p:menuitem value="#{txtMain.mainPage}" action="/pages/user/pageMain?faces-redirect=true"
 					icon="pi pi-home">
 				</p:menuitem>
-				<p:menuitem value="#{txtMain.MyOrders}" action="#{userOrdersBB.showUserOrders()}"
+				<p:menuitem value="#{txtMain.MyOrders}" action="#{zamowienieBB.showUserOrders()}"
 					icon="pi pi-shopping-cart">
 				</p:menuitem>
 				<p:menuitem value="#{txtMain.LogOut}" action="#{loginBB.doLogout()}"
