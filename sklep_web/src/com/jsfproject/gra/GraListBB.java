@@ -3,11 +3,13 @@ package com.jsfproject.gra;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.ejb.EJB;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -30,6 +32,11 @@ public class GraListBB {
 
 	@Inject
 	Flash flash;
+	
+	// Resource injected
+	@Inject
+	@ManagedProperty("#{txtMain}")
+	private ResourceBundle txtMain;
 
 	@EJB
 	GraDAO graDAO;
@@ -104,7 +111,7 @@ public class GraListBB {
 	}
 
 	public String deleteGra(Gra gra) {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuń grę", "Gra została usunięta");
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, txtMain.getString("DeleteGame"), txtMain.getString("GameDeleted"));
 		FacesContext.getCurrentInstance().addMessage(PAGE_GRA_BUY, msg);
 		graDAO.remove(gra);
 		return PAGE_STAY_AT_THE_SAME;

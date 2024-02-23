@@ -33,7 +33,7 @@ public class Gra implements Serializable {
 	private String producentGry;
 
 	//bi-directional many-to-one association to GraHasZamowienie
-	@OneToMany(mappedBy="gra")
+	@OneToMany(mappedBy="gra", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<GraHasZamowienie> graHasZamowienies;
 
 	public Gra() {

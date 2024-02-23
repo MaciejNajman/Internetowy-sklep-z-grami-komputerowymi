@@ -3,10 +3,12 @@ package jsf.project.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
+import jsf.project.dto.ZamowienieDTO;
 import jsf.project.entities.Zamowienie;
 
 @Stateless
@@ -49,10 +51,10 @@ public class ZamowienieDAO {
 		return userId;
 	}
 	
-	public List<Zamowienie> getFullOrderListForUser(Integer userId) {
-		List<Zamowienie> list = null;
+	public List<ZamowienieDTO> getOrdersListForUser(Integer userId) {
+		List<ZamowienieDTO> list = null;
 		
-		String select = "SELECT g.nazwaGry, g.cena, g.gatunek, g.klasyfikacjaWiekowa, g.producentGry, z.dataZlozeniaZamowienia, z.dataRealizacjiZamowienia ";
+		String select = "SELECT new jsf.project.dto.ZamowienieDTO(g.nazwaGry, g.cena, g.gatunek, g.klasyfikacjaWiekowa, g.producentGry, z.dataZlozeniaZamowienia, z.dataRealizacjiZamowienia) ";
 		String from = "FROM Gra g JOIN GraHasZamowienie gz ON g.idGra=gz.gra JOIN Zamowienie z ON gz.zamowienie=z.idZamowienie JOIN Uzytkownik u ON z.uzytkownik=u.idUzytkownik ";
 		String where = "";
 		String orderby = "ORDER BY z.dataZlozeniaZamowienia DESC";
@@ -68,7 +70,8 @@ public class ZamowienieDAO {
 		}
 
 		//Query query = em.createQuery("SELECT g.nazwaGry, g.cena, g.gatunek, g.klasyfikacjaWiekowa, g.producentGry, gz.iloscSztuk, z.dataZlozeniaZamowienia, z.dataRealizacjiZamowienia FROM Gra g JOIN GraHasZamowienie gz ON g.idGra=gz.gra JOIN Zamowienie z ON gz.zamowienie=z.idZamowienie JOIN Uzytkownik u ON z.uzytkownik=u.idUzytkownik WHERE u.idUzytkownik like :user_id");
-		Query query = em.createQuery(select + from + where + orderby);
+		//Query query = em.createQuery(select + from + where + orderby);
+		TypedQuery<ZamowienieDTO> query = em.createQuery(select + from + where + orderby, ZamowienieDTO.class);
 		
 		if (user_id != null) {
 			query.setParameter("user_id", user_id);

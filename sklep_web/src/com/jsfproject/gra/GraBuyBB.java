@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import jsf.project.dao.GraDAO;
 import jsf.project.entities.Gra;
-import jsf.project.entities.GraHasZamowienie;
-import jsf.project.entities.GraHasZamowieniePK;
 import jsf.project.entities.Uzytkownik;
 import jsf.project.entities.Zamowienie;
 

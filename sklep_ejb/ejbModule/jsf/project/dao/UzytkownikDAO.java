@@ -1,13 +1,10 @@
 package jsf.project.dao;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import jsf.project.entities.Gra;
 import jsf.project.entities.Uzytkownik;
 
 @Stateless
