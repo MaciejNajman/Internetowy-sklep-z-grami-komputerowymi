@@ -25,7 +25,7 @@
 					rowIndexVar="rowIndex">
 
 					<p:dataViewGridItem>
-						<p:panel header="Zamówienie #{rowIndex+1}"
+						<p:panel header="#{txtMain.Order} #{rowIndex+1}"
 							style="text-align:center">
 							<h:panelGrid columns="1" style="width:100%">
 
@@ -44,22 +44,22 @@
 					</p:dataViewGridItem>
 
 					<p:dataViewListItem>
-						<p:panel header="Zamówienie #{rowIndex+1}"
+						<p:panel header="#{txtMain.Order} #{rowIndex+1}"
 							style="text-align:left">
 							<h:panelGrid columns="3" style="width:100%"
 								columnClasses="logo,detail">
 
 								<p:outputPanel>
 									<h:panelGrid columns="2" cellpadding="5">
-										<h:outputText value="Nazwa:" />
+										<h:outputText value="#{txtMain.NameWithColon}" />
 										<h:outputText value="#{order.nazwaGry}"
 											style="font-weight: bold" />
 
-										<h:outputText value="Cena:" />
+										<h:outputText value="#{txtMain.PriceWithColon}" />
 										<h:outputText value="#{order.cena}zł"
 											style="font-weight: bold" />
 
-										<h:outputText value="Data Zlozenia Zamowienia:" />
+										<h:outputText value="#{txtMain.OrderDateWithColon}" />
 										<h:outputText value="#{order.dataZlozeniaZamowienia}"
 											style="font-weight: bold" />
 									</h:panelGrid>
@@ -77,34 +77,34 @@
 					</p:dataViewListItem>
 				</p:dataView>
 
-				<p:dialog header="Szczegóły zamówienia" widgetVar="orderDialog"
+				<p:dialog header="#{txtMain.Details}" widgetVar="orderDialog"
 					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 					<p:outputPanel id="orderDetail" style="text-align:center;">
 						<p:panelGrid columns="2"
 							rendered="#{not empty zamowienieBB.selectedOrder}"
 							columnClasses="label,value">
 
-							<h:outputText value="Nazwa:" />
+							<h:outputText value="#{txtMain.NameWithColon}" />
 							<h:outputText value="#{zamowienieBB.selectedOrder.nazwaGry}" />
 
-							<h:outputText value="Cena:" />
+							<h:outputText value="#{txtMain.PriceWithColon}" />
 							<h:outputText value="#{zamowienieBB.selectedOrder.cena}zł" />
 
-							<h:outputText value="Gatunek:" />
+							<h:outputText value="#{txtMain.GenreWithColon}" />
 							<h:outputText value="#{zamowienieBB.selectedOrder.gatunek}" />
 
-							<h:outputText value="Klasyfikacja:" />
+							<h:outputText value="#{txtMain.AgeResWithColon}" />
 							<h:outputText
 								value="#{zamowienieBB.selectedOrder.klasyfikacjaWiekowa}" />
 
-							<h:outputText value="Producent:" />
+							<h:outputText value="#{txtMain.DevWithColon}" />
 							<h:outputText value="#{zamowienieBB.selectedOrder.producentGry}" />
 
-							<h:outputText value="Data złożenia:" />
+							<h:outputText value="#{txtMain.OrderDateWithColon}" />
 							<h:outputText
 								value="#{zamowienieBB.selectedOrder.dataZlozeniaZamowienia}" />
 
-							<h:outputText value="Data realizacji:" />
+							<h:outputText value="#{txtMain.OrderCompletionDateWithColon}" />
 							<h:outputText
 								value="#{zamowienieBB.selectedOrder.dataRealizacjiZamowienia}" />
 						</p:panelGrid>

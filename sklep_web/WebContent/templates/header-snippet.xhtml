@@ -8,13 +8,13 @@
 		styleClass="bottom-space">
 		<h:form>
 			<p:tabMenu activeIndex="#{param.i}">
-				<p:menuitem value="#{txtMain.mainPage}" action="/pages/user/pageMain?faces-redirect=true"
+				<p:menuitem id="pageMainItem" value="#{txtMain.mainPage}" action="/pages/user/pageMain?faces-redirect=true"
 					icon="pi pi-home">
 				</p:menuitem>
-				<p:menuitem value="#{txtMain.MyOrders}" action="#{zamowienieBB.showUserOrders()}"
-					icon="pi pi-shopping-cart">
+				<p:menuitem id="pageUserOrdersItem" value="#{txtMain.MyOrders}" action="#{zamowienieBB.showUserOrders()}"
+					icon="pi pi-shopping-cart" rendered="#{zamowienieBB.hideElementForEmployee()}">
 				</p:menuitem>
-				<p:menuitem value="#{txtMain.LogOut}" action="#{loginBB.doLogout()}"
+				<p:menuitem id="logoutItem" value="#{txtMain.LogOut}" action="#{loginBB.doLogout()}"
 					icon="pi pi-sign-out">
 				</p:menuitem>
 			</p:tabMenu>

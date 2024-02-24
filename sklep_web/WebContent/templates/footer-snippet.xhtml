@@ -3,13 +3,21 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
-	
-	
+
+
 	<p:panel header="#{txtMain.Footer}" toggleable="true" toggleSpeed="500">
 		<h:form>
-			<p:commandLink id="storePage" action="/pages/user/pageMain?faces-redirect=true" value="#{txtMain.StorePage}" /> | 
-			<p:commandLink id="employeePage" action="/pages/employee/graList?faces-redirect=true" value="#{txtMain.EmployeePage}" /> | 
-			<p:commandLink id="adminPage" action="/pages/admin/page?faces-redirect=true" disabled="true" value="#{txtMain.AdminPage}" /> 
+			<p:commandLink id="storePage"
+				action="/pages/user/pageMain?faces-redirect=true"
+				value="#{txtMain.StorePage}"
+				rendered="#{zamowienieBB.hideElementForEmployee()}" /> |
+			<p:commandLink id="employeePage"
+				action="/pages/employee/graList?faces-redirect=true"
+				value="#{txtMain.EmployeePage}"
+				rendered="#{zamowienieBB.hideElementForUser()}" /> 
+			<p:commandLink id="adminPage"
+				action="/pages/admin/page?faces-redirect=true" rendered="false"
+				value="#{txtMain.AdminPage}" />
 		</h:form>
 		<p>#{txtMain.projectFooter}</p>
 	</p:panel>

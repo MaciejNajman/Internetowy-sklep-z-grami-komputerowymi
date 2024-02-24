@@ -26,6 +26,7 @@ public class GraListBB {
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private String nazwaGry;
+	private String gatunek;
 
 	@Inject
 	ExternalContext extcontext;
@@ -66,6 +67,14 @@ public class GraListBB {
 		this.nazwaGry = nazwaGry;
 	}
 
+	public String getGatunek() {
+		return gatunek;
+	}
+
+	public void setGatunek(String gatunek) {
+		this.gatunek = gatunek;
+	}
+
 	public List<Gra> getFullList(){
 		return graDAO.getFullList();
 	}
@@ -76,8 +85,9 @@ public class GraListBB {
 		// 1. Prepare search params
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 
-		if (nazwaGry != null && nazwaGry.length() > 0) {
+		if ((nazwaGry != null && nazwaGry.length() > 0) || (gatunek != null && gatunek.length() > 0)) {
 			searchParams.put("nazwaGry", nazwaGry);
+			searchParams.put("gatunek", gatunek);
 		}
 
 		// 2. Get list

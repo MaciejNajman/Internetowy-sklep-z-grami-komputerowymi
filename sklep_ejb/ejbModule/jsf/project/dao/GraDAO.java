@@ -82,6 +82,16 @@ public class GraDAO {
 			where += "g.nazwaGry like :nazwa_gry ";
 		}
 		
+		String gatunek = (String) searchParams.get("gatunek");
+		if (gatunek != null) {
+			if (where.isEmpty()) {
+				where = "where ";
+			} else {
+				where += "and ";
+			}
+			where += "g.gatunek like :gatunek ";
+		}
+		
 		// ... other parameters ... 
 
 		// 2. Create query object
@@ -89,7 +99,11 @@ public class GraDAO {
 
 		// 3. Set configured parameters
 		if (nazwa_gry != null) {
-			query.setParameter("nazwa_gry", nazwa_gry+"%");
+			query.setParameter("nazwa_gry", "%"+nazwa_gry+"%");
+		}
+		
+		if (gatunek != null) {
+			query.setParameter("gatunek", "%"+gatunek+"%");
 		}
 
 		// ... other parameters ... 

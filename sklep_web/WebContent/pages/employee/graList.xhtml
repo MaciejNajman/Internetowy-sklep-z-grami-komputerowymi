@@ -8,7 +8,7 @@
 
 <ui:composition template="/templates/main-template.xhtml">
 
-	<ui:define name="title">
+<ui:define name="title">
 	#{txtMain.EmployeePage}
 </ui:define>
 
@@ -18,8 +18,14 @@
 			collapsed="false" style="margin-bottom: 1em;">
 			<h:form>
 				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel value="#{txtMain.GameName}" />
+					<h:outputLabel value="#{txtMain.SearchByGameName}" />
 					<p:inputText value="#{graListBB.nazwaGry}" />
+					
+					<h:outputText value="#{txtMain.OR}" />
+					<h:outputText value=" " />
+					
+					<h:outputLabel value="#{txtMain.SearchByGenre}" />
+					<p:inputText value="#{graListBB.gatunek}" />
 					<p:commandButton value="#{txtMain.Search}" update="form-table" />
 				</h:panelGrid>
 			</h:form>

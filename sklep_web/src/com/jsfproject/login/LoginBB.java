@@ -25,6 +25,7 @@ import jsf.project.entities.UzytkownikRola;
 public class LoginBB {
 
 	private static final String PAGE_MAIN = "/pages/user/pageMain?faces-redirect=true";
+	private static final String GRA_LIST = "/pages/employee/graList?faces-redirect=true";
 	private static final String PAGE_LOGIN = "/pages/login?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 	private static final String PAGE_REGISTER = "/pages/register?faces-redirect=true";
@@ -97,7 +98,11 @@ public class LoginBB {
 		// Uzytkownik u = c.getDetails();
 
 		// and enter the system (now SecurityFilter will pass the request)
-		return PAGE_MAIN;
+		if(client.isInRole("user")) {
+			return PAGE_MAIN;
+		} else {
+			return GRA_LIST;
+		}
 	}
 
 	public String doLogout() {

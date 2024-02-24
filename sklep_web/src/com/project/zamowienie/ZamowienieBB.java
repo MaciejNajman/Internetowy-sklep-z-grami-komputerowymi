@@ -133,7 +133,7 @@ public class ZamowienieBB implements Serializable {
 	public void setKraj(String kraj) {
 		this.kraj = kraj;
 	}
-	
+
 	public ZamowienieDTO getSelectedOrder() {
 		return selectedOrder;
 	}
@@ -255,5 +255,31 @@ public class ZamowienieBB implements Serializable {
 		list = zamowienieDAO.getOrdersListForUser(userId);
 
 		return list;
+	}
+
+	public boolean hideElementForEmployee() {
+		boolean showElement = true;
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
+		RemoteClient<Uzytkownik> c = RemoteClient.load(req.getSession());
+		
+		if (c.isInRole("employee")) {
+			showElement = false;
+		}
+		
+		return showElement;
+	}
+	
+	public boolean hideElementForUser() {
+		boolean showElement = true;
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
+		RemoteClient<Uzytkownik> c = RemoteClient.load(req.getSession());
+		
+		if (c.isInRole("user")) {
+			showElement = false;
+		}
+		
+		return showElement;
 	}
 }
