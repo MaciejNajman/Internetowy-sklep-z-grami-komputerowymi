@@ -13,25 +13,23 @@
 </ui:define>
 
 	<ui:define name="content">
-
+		<p:growl id="msg" showDetail="true" life="5000" />
 		<p:panel header="#{txtMain.SearchOptions}" toggleable="true"
 			collapsed="false" style="margin-bottom: 1em;">
 			<h:form>
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel value="#{txtMain.SearchByGameName}" />
 					<p:inputText value="#{graListBB.nazwaGry}" />
-					
+
 					<h:outputText value="#{txtMain.OR}" />
 					<h:outputText value=" " />
-					
+
 					<h:outputLabel value="#{txtMain.SearchByGenre}" />
 					<p:inputText value="#{graListBB.gatunek}" />
 					<p:commandButton value="#{txtMain.Search}" update="form-table" />
 				</h:panelGrid>
 			</h:form>
 		</p:panel>
-
-		<p:messages />
 
 		<p:panel header="#{txtMain.GameEdit}" toggleable="true"
 			style="margin-bottom: 1em;">
@@ -54,7 +52,7 @@
 						<f:facet name="header">
 							<h:outputText value="#{txtMain.Price}" />
 						</f:facet>
-						<h:outputText value="#{g.cena}" />
+						<h:outputText value="#{g.cena}zł" />
 					</p:column>
 
 					<p:column priority="4">
@@ -90,7 +88,8 @@
 						<p:commandButton value="#{txtMain.Delete}"
 							action="#{graListBB.deleteGra(g)}" update="@form">
 							<p:confirm header="#{txtMain.Conf}"
-								message="#{txtMain.ConfirmDelete}" icon="pi pi-exclamation-triangle" />
+								message="#{txtMain.ConfirmDelete}"
+								icon="pi pi-exclamation-triangle" />
 						</p:commandButton>
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 							<p:commandButton value="#{txtMain.Yes}" type="button"
@@ -103,7 +102,6 @@
 				</p:dataTable>
 			</h:form>
 		</p:panel>
-
 	</ui:define>
 
 </ui:composition>

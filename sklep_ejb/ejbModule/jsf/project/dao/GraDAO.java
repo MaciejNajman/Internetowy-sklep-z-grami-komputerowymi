@@ -1,7 +1,10 @@
 package jsf.project.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -48,10 +51,11 @@ public class GraDAO {
 //		return list;
 //	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Gra> getFullList() {
 		List<Gra> list = null;
 
-		Query query = em.createQuery("select g from Gra g");
+		Query query = em.createQuery("select g from Gra g order by g.nazwaGry");
 
 		try {
 			list = query.getResultList();
@@ -62,6 +66,7 @@ public class GraDAO {
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Gra> getList(Map<String, Object> searchParams) {
 		List<Gra> list = null;
 
@@ -117,4 +122,37 @@ public class GraDAO {
 
 		return list;
 	}
+	
+    public List<Gra> recommendGames(Integer userId) {
+        // Find genres of games the user has purchased
+        List<String> userGenres = em.createQuery("SELECT g.gatunek FROM Gra g "
+        		+ "JOIN GraHasZamowienie gz ON g.idGra=gz.gra "
+        		+ "JOIN Zamowienie z ON gz.zamowienie=z.idZamowienie "
+        		+ "JOIN Uzytkownik u ON z.uzytkownik=u.idUzytkownik "
+        		+ "WHERE u.idUzytkownik like :user_id "
+        		+ "ORDER BY g.nazwaGry", String.class)
+                .setParameter("user_id", userId)
+                .getResultList();
+
+        // Find games with the same genres but exclude games the user has already purchased
+        List<Gra> recommendations = new ArrayList<>();
+        for (String genre : userGenres) {
+            recommendations.addAll(em.createQuery("SELECT g FROM Gra g "
+            		+ "WHERE g.gatunek like :gatunek "
+            		+ "AND g.idGra NOT IN "
+            		+ "(SELECT g.idGra FROM Gra g "
+            		+ "JOIN GraHasZamowienie gz ON g.idGra=gz.gra "
+            		+ "JOIN Zamowienie z ON gz.zamowienie=z.idZamowienie "
+            		+ "JOIN Uzytkownik u ON z.uzytkownik=u.idUzytkownik "
+            		+ "WHERE u.idUzytkownik like :user_id) "
+            		+ "ORDER BY g.nazwaGry ", Gra.class)
+                    .setParameter("gatunek", genre)
+                    .setParameter("user_id", userId)
+                    .getResultList());
+        }
+
+        // Remove duplicates
+        Set<Gra> uniqueRecommendations = new HashSet<>(recommendations);
+        return new ArrayList<>(uniqueRecommendations);
+    }
 }

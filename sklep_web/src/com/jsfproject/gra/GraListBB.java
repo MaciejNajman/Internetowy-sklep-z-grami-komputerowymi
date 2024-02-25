@@ -1,5 +1,6 @@
 package com.jsfproject.gra;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,8 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -27,6 +28,8 @@ public class GraListBB {
 
 	private String nazwaGry;
 	private String gatunek;
+	private List<Gra> list = new ArrayList<>();
+	//private List<Gra> filteredList = new ArrayList<>();
 
 	@Inject
 	ExternalContext extcontext;
@@ -75,12 +78,13 @@ public class GraListBB {
 		this.gatunek = gatunek;
 	}
 
-	public List<Gra> getFullList(){
-		return graDAO.getFullList();
-	}
+//	public List<Gra> getList(){
+//		list = graDAO.getFullList();
+//		return list;
+//	}
 
 	public List<Gra> getList() {
-		List<Gra> list = null;
+		list = null;
 
 		// 1. Prepare search params
 		Map<String, Object> searchParams = new HashMap<String, Object>();
@@ -94,6 +98,10 @@ public class GraListBB {
 		list = graDAO.getList(searchParams);
 
 		return list;
+	}
+
+	public void setList(List<Gra> list) {
+		this.list = list;
 	}
 
 	public String newGra() {

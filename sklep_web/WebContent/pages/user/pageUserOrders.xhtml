@@ -22,7 +22,7 @@
 					paginator="true" rowsPerPageTemplate="6,12,16"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					gridIcon="pi pi-th-large" listIcon="pi pi-bars"
-					rowIndexVar="rowIndex">
+					rowIndexVar="rowIndex" layout="grid" >
 
 					<p:dataViewGridItem>
 						<p:panel header="#{txtMain.Order} #{rowIndex+1}"
@@ -110,6 +110,21 @@
 						</p:panelGrid>
 					</p:outputPanel>
 				</p:dialog>
+			</h:form>
+		</p:panel>
+
+		<p:panel header="#{txtMain.RecommendedGames}" toggleable="true"
+			style="margin-bottom: 1em;">
+			<h:form id="form-recommendedGames" style="margin-bottom:1em;">
+				<p:dataTable value="#{graRecommenderBB.recommendedGames}"
+					var="game">
+					<p:column headerText="#{txtMain.NameWithColon}">
+						<h:outputText value="#{game.nazwaGry}" />
+					</p:column>
+					<p:column headerText="#{txtMain.GenreWithColon}">
+						<h:outputText value="#{game.gatunek}" />
+					</p:column>
+				</p:dataTable>
 			</h:form>
 		</p:panel>
 
