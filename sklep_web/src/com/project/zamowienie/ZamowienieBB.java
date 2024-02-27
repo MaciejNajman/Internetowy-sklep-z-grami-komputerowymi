@@ -33,7 +33,7 @@ public class ZamowienieBB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String PAGE_MAIN = "pageMain?faces-redirect=true";
-	private static final String PAGE_USER_ORDERS = "pageUserOrders?faces-redirect=true";
+	private static final String PAGE_USER_ORDERS = "/pages/user/pageUserOrders?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private Zamowienie zamowienie = new Zamowienie();

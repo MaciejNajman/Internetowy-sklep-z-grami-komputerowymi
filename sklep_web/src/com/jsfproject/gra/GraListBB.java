@@ -1,5 +1,6 @@
 package com.jsfproject.gra;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,20 +9,22 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.view.ViewScoped;
 
 import jsf.project.dao.GraDAO;
 import jsf.project.entities.Gra;
 
 @Named
-@RequestScoped
-public class GraListBB {
+@ViewScoped
+public class GraListBB implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private static final String PAGE_GRA_EDIT = "graEdit?faces-redirect=true";
 	private static final String PAGE_GRA_BUY = "graBuy?faces-redirect=true";
 	private static final String PAGE_STAY_AT_THE_SAME = null;
@@ -44,23 +47,12 @@ public class GraListBB {
 
 	@EJB
 	GraDAO graDAO;
-	//private LazyDataModel<Gra> model;
 
-//	@PostConstruct
-//	public void init() {
-//		model = new LazyDataModel<Gra>() {
-//
-//			public List<Gra> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
-//				model.setRowCount(graDAO.count(filters, myParameter));
-//				return graDAO.getLazyList(first, pageSize, sortField, sortOrder, filters, myParameter);
-//			}
-//		};
-//		model.setRowCount(graDAO.count(new HashMap<String, String>()));
-//	}
+	@PostConstruct
+	public void init() {
+		list = graDAO.getFullList();
+	}
 
-//	public LazyDataModel<Gra> getLazyModel() {
-//		return model;
-//	}
 
 	public String getNazwaGry() {
 		return nazwaGry;
@@ -78,27 +70,26 @@ public class GraListBB {
 		this.gatunek = gatunek;
 	}
 
-//	public List<Gra> getList(){
-//		list = graDAO.getFullList();
-//		return list;
-//	}
-
-	public List<Gra> getList() {
-		list = null;
-
-		// 1. Prepare search params
-		Map<String, Object> searchParams = new HashMap<String, Object>();
-
-		if ((nazwaGry != null && nazwaGry.length() > 0) || (gatunek != null && gatunek.length() > 0)) {
-			searchParams.put("nazwaGry", nazwaGry);
-			searchParams.put("gatunek", gatunek);
-		}
-
-		// 2. Get list
-		list = graDAO.getList(searchParams);
-
+	public List<Gra> getList(){
 		return list;
 	}
+
+//	public List<Gra> getList() {
+//		list = null;
+//
+//		// 1. Prepare search params
+//		Map<String, Object> searchParams = new HashMap<String, Object>();
+//
+//		if ((nazwaGry != null && nazwaGry.length() > 0) || (gatunek != null && gatunek.length() > 0)) {
+//			searchParams.put("nazwaGry", nazwaGry);
+//			searchParams.put("gatunek", gatunek);
+//		}
+//
+//		// 2. Get list
+//		list = graDAO.getList(searchParams);
+//
+//		return list;
+//	}
 
 	public void setList(List<Gra> list) {
 		this.list = list;

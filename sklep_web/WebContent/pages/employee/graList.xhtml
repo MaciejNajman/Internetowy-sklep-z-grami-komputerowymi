@@ -14,22 +14,6 @@
 
 	<ui:define name="content">
 		<p:growl id="msg" showDetail="true" life="5000" />
-		<p:panel header="#{txtMain.SearchOptions}" toggleable="true"
-			collapsed="false" style="margin-bottom: 1em;">
-			<h:form>
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel value="#{txtMain.SearchByGameName}" />
-					<p:inputText value="#{graListBB.nazwaGry}" />
-
-					<h:outputText value="#{txtMain.OR}" />
-					<h:outputText value=" " />
-
-					<h:outputLabel value="#{txtMain.SearchByGenre}" />
-					<p:inputText value="#{graListBB.gatunek}" />
-					<p:commandButton value="#{txtMain.Search}" update="form-table" />
-				</h:panelGrid>
-			</h:form>
-		</p:panel>
 
 		<p:panel header="#{txtMain.GameEdit}" toggleable="true"
 			style="margin-bottom: 1em;">
@@ -38,41 +22,30 @@
 				<p:commandButton value="#{txtMain.AddNewGame}"
 					action="#{graListBB.newGra()}" style="margin-bottom:1em;" />
 
-				<p:dataTable value="#{graListBB.list}" var="g" rows="10"
-					paginator="true" paginatorPosition="bottom">
+				<p:dataTable id="gamesTableForEmployee" value="#{graListBB.list}" var="g" rows="10"
+					paginator="true" paginatorPosition="bottom" widgetVar="gamesTableWidget">
 
-					<p:column priority="5">
-						<f:facet name="header">
-							<h:outputText value="#{txtMain.GameName}" />
-						</f:facet>
+					<p:column id="nazwaGryColumnForEmployee" priority="5"
+						headerText="#{txtMain.GameName}" sortBy="#{g.nazwaGry}"
+						filterBy="#{g.nazwaGry}" filterMatchMode="contains">
 						<h:outputText value="#{g.nazwaGry}" />
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{txtMain.Price}" />
-						</f:facet>
+					<p:column headerText="#{txtMain.Price}" sortBy="#{g.cena}">
 						<h:outputText value="#{g.cena}zł" />
 					</p:column>
 
-					<p:column priority="4">
-						<f:facet name="header">
-							<h:outputText value="#{txtMain.Genre}" />
-						</f:facet>
+					<p:column priority="4" headerText="#{txtMain.Genre}"
+						sortBy="#{g.gatunek}" filterBy="#{g.gatunek}"
+						filterMatchMode="contains">
 						<h:outputText value="#{g.gatunek}" />
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{txtMain.AgeRes}" />
-						</f:facet>
+					<p:column headerText="#{txtMain.AgeRes}" sortBy="#{g.klasyfikacjaWiekowa}">
 						<h:outputText value="#{g.klasyfikacjaWiekowa}" />
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{txtMain.Dev}" />
-						</f:facet>
+					<p:column headerText="#{txtMain.Dev}" sortBy="#{g.producentGry}">
 						<h:outputText value="#{g.producentGry}" />
 					</p:column>
 
